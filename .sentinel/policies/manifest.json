@@ -1,0 +1,34 @@
+{
+	"records": [
+		{
+			"key": "restrict-s3-bucket-policies",
+			"source": "./restrict-s3-bucket-policies.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/wallacepf/Dev/terraform-sentinel-demo/sentinel/restrict-s3-bucket-policies.sentinel"
+		},
+		{
+			"key": "limit-proposed-monthly-cost",
+			"source": "./limit-proposed-monthly-cost.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/wallacepf/Dev/terraform-sentinel-demo/sentinel/limit-proposed-monthly-cost.sentinel"
+		},
+		{
+			"key": "restrict-ec2-instance-type",
+			"source": "./restrict-ec2-instance-type.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/wallacepf/Dev/terraform-sentinel-demo/sentinel/restrict-ec2-instance-type.sentinel"
+		},
+		{
+			"key": "enforce-mandatory-tags",
+			"source": "./enforce-mandatory-tags.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/wallacepf/Dev/terraform-sentinel-demo/sentinel/enforce-mandatory-tags.sentinel"
+		},
+		{
+			"key": "require-private-acl-and-kms-for-s3-buckets",
+			"source": "./require-private-acl-and-kms-for-s3-buckets.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/wallacepf/Dev/terraform-sentinel-demo/sentinel/require-private-acl-and-kms-for-s3-buckets.sentinel"
+		}
+	]
+}

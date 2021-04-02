@@ -1,0 +1,28 @@
+{
+	"records": [
+		{
+			"key": "tfplan-functions",
+			"source": "./common-functions/tfplan-functions.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/wallacepf/Dev/terraform-sentinel-demo/sentinel/common-functions/tfplan-functions.sentinel"
+		},
+		{
+			"key": "tfstate-functions",
+			"source": "./common-functions/tfstate-functions.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/wallacepf/Dev/terraform-sentinel-demo/sentinel/common-functions/tfstate-functions.sentinel"
+		},
+		{
+			"key": "tfconfig-functions",
+			"source": "./common-functions/tfconfig-functions.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/wallacepf/Dev/terraform-sentinel-demo/sentinel/common-functions/tfconfig-functions.sentinel"
+		},
+		{
+			"key": "aws-functions",
+			"source": "./aws-functions/aws-functions.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/wallacepf/Dev/terraform-sentinel-demo/sentinel/aws-functions/aws-functions.sentinel"
+		}
+	]
+}
