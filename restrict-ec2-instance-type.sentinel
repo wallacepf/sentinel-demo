@@ -14,7 +14,6 @@ get_aws_instances = func() {
 
 # Allowed Types
 allowed_types = [
-  "t2.nano",
   "t2.small",
   "t2.medium",
   "t2.large",
