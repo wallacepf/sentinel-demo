@@ -23,7 +23,7 @@ policy "limit-proposed-monthly-cost" {
 
 policy "restrict-ec2-instance-type" {
   source = "./restrict-ec2-instance-type.sentinel"
-  enforcement_level = "hard-mandatory"
+  enforcement_level = "soft-mandatory"
 }
 
 policy "enforce-mandatory-tags" {

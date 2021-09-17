@@ -2,7 +2,6 @@
 # Source: https://github.com/hashicorp/terraform-guides/blob/master/governance/first-generation/aws/restrict-aws-instance-type.sentinel
 # Note: this is a more simple, first generation policy
 import "tfplan"
-
 # Get all AWS instances from all modules
 get_aws_instances = func() {
     instances = []
