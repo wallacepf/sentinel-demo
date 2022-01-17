@@ -17,8 +17,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup TF
         uses: hashicorp/setup-terraform@v1
-        env:
-          TFE_TOKEN: ${{ secrets.TFC_TOKEN }}
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       - name: Terraform Format
         working-directory: ./tf/sentinel-policy-creation
         id: fmt
