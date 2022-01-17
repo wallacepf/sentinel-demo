@@ -12,8 +12,6 @@ jobs:
       - run: ./sentinel test
   create-policy-set:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./tf/sentinel-policy-creation
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,16 +20,19 @@ jobs:
         with:
           cli_config_credentials_token: ${{ secrets.TFC_TOKEN }}
       - name: Terraform Format
+        working-directory: ./tf/iam-demo
         id: fmt
         run: terraform fmt -check
       - name: Terraform Init
+        working-directory: ./tf/iam-demo
         id: init
         run: terraform init
-      - run: pwd && ls -l
       - name: Terraform Validate
+        working-directory: ./tf/iam-demo
         id: validate
         run: terraform validate -no-color
       - name: Terraform Plan
+        working-directory: ./tf/iam-demo
         id: plan
         if: github.event_name == 'pull_request'
         run: terraform plan -no-color
@@ -66,9 +67,11 @@ jobs:
               body: output
             })
       - name: Terraform Plan Status
+        working-directory: ./tf/iam-demo
         if: steps.plan.outcome == 'failure'
         run: exit 1
       - name: Terraform Apply
+        working-directory: ./tf/iam-demo
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve
 
