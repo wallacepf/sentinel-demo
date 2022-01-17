@@ -1,4 +1,3 @@
-variable "token" {}
 variable "org" {
   default = "my-demo-account"
 }
