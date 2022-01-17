@@ -1,0 +1,4 @@
+tf/*/.terraform
+tf/*/*.lock*
+tf/*/*.tfstate
+.sentinel
