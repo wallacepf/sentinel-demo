@@ -1,0 +1,15 @@
+import "tfplan/v2" as tfplan
+
+iam_resource = filter tfplan.resource_changes as _, rc {
+	# (rc.type is "module.iam_user2" or rc.type is "module.iam_user") and
+	#  (rc.change.actions is "create" or rc.change.actions is ["update"])
+	rc.type is "aws_iam_user" and
+		(rc.change.actions contains "create" or rc.change.actions is ["update"])
+
+}
+
+print(iam_resource)
+
+main = rule {
+	iam_resource is not empty
+}
