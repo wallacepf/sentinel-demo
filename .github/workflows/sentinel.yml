@@ -1,10 +1,12 @@
 name: sentinel-pipe
 on: [push, workflow_dispatch]
 jobs:
-  init:
+  test-sentinel-policy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: curl https://releases.hashicorp.com/sentinel/0.18.4/sentinel_0.18.4_linux_amd64.zip --output sentinel.zip
       - run: unzip sentinel.zip
       - run: ./sentinel version
+      - run: ./sentinel fmt *.sentinel
+      - run: ./sentinel test
