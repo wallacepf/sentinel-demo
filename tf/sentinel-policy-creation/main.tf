@@ -10,7 +10,7 @@ terraform {
 
 provider "tfe" {}
 
-resource "tfe_policy_set" "deny-iam-user-creation" {
+resource "tfe_policy_set" "test" {
   name         = "deny-iam-user-creation"
   description  = "Policy Set to Deny IAM account creation"
   organization = var.org
