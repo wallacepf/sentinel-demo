@@ -11,13 +11,14 @@ jobs:
       - run: ./sentinel fmt *.sentinel
       - run: ./sentinel test
   create-policy-set:
+    needs: test-sentinel-policy
     runs-on: ubuntu-latest
+    env:
+      TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup TF
-        env:
-          TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
         run: |
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
