@@ -75,7 +75,7 @@ jobs:
           TF_VAR_vcs_oauth_key: ${{ secrets.VCS_OAUTH_KEY }}
         working-directory: ./tf/sentinel-policy-creation
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -var TF_VAR_
+        run: terraform apply -auto-approve
 
 
 
