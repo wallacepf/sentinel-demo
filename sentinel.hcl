@@ -1,4 +1,4 @@
 policy "deny-iam-user-creation" {
   source = "./block-iam-account-creation.sentinel"
-  enforcement_level = "soft-mandatory"
+  enforcement_level = "hard-mandatory"
 }

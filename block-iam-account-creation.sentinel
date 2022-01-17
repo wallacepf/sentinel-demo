@@ -11,5 +11,5 @@ iam_resource = filter tfplan.resource_changes as _, rc {
 print(iam_resource)
 
 main = rule {
-	iam_resource is not empty
+	iam_resource is empty
 }
