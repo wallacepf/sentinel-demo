@@ -1,0 +1,563 @@
+import "strings"
+
+providers = {
+	"aws": {
+		"alias": "",
+		"config": {
+			"region": {
+				"constant_value": "us-east-1",
+			},
+		},
+		"module_address":      "",
+		"name":                "aws",
+		"provider_config_key": "aws",
+		"version_constraint":  "",
+	},
+	"module.iam_user2:aws": {
+		"alias":               "",
+		"config":              {},
+		"module_address":      "module.iam_user2",
+		"name":                "aws",
+		"provider_config_key": "module.iam_user2:aws",
+		"version_constraint":  ">= 2.50.0",
+	},
+}
+
+resources = {
+	"module.iam_user2.aws_iam_access_key.this": {
+		"address": "module.iam_user2.aws_iam_access_key.this",
+		"config": {
+			"pgp_key": {
+				"references": [
+					"var.pgp_key",
+				],
+			},
+			"user": {
+				"references": [
+					"aws_iam_user.this[0].name",
+					"aws_iam_user.this[0]",
+					"aws_iam_user.this",
+				],
+			},
+		},
+		"count": {
+			"references": [
+				"var.create_user",
+				"var.create_iam_access_key",
+				"var.pgp_key",
+			],
+		},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "module.iam_user2",
+		"name":                "this",
+		"provider_config_key": "module.iam_user2:aws",
+		"provisioners":        [],
+		"type":                "aws_iam_access_key",
+	},
+	"module.iam_user2.aws_iam_access_key.this_no_pgp": {
+		"address": "module.iam_user2.aws_iam_access_key.this_no_pgp",
+		"config": {
+			"user": {
+				"references": [
+					"aws_iam_user.this[0].name",
+					"aws_iam_user.this[0]",
+					"aws_iam_user.this",
+				],
+			},
+		},
+		"count": {
+			"references": [
+				"var.create_user",
+				"var.create_iam_access_key",
+				"var.pgp_key",
+			],
+		},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "module.iam_user2",
+		"name":                "this_no_pgp",
+		"provider_config_key": "module.iam_user2:aws",
+		"provisioners":        [],
+		"type":                "aws_iam_access_key",
+	},
+	"module.iam_user2.aws_iam_user.this": {
+		"address": "module.iam_user2.aws_iam_user.this",
+		"config": {
+			"force_destroy": {
+				"references": [
+					"var.force_destroy",
+				],
+			},
+			"name": {
+				"references": [
+					"var.name",
+				],
+			},
+			"path": {
+				"references": [
+					"var.path",
+				],
+			},
+			"permissions_boundary": {
+				"references": [
+					"var.permissions_boundary",
+				],
+			},
+			"tags": {
+				"references": [
+					"var.tags",
+				],
+			},
+		},
+		"count": {
+			"references": [
+				"var.create_user",
+			],
+		},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "module.iam_user2",
+		"name":                "this",
+		"provider_config_key": "module.iam_user2:aws",
+		"provisioners":        [],
+		"type":                "aws_iam_user",
+	},
+	"module.iam_user2.aws_iam_user_login_profile.this": {
+		"address": "module.iam_user2.aws_iam_user_login_profile.this",
+		"config": {
+			"password_length": {
+				"references": [
+					"var.password_length",
+				],
+			},
+			"password_reset_required": {
+				"references": [
+					"var.password_reset_required",
+				],
+			},
+			"pgp_key": {
+				"references": [
+					"var.pgp_key",
+				],
+			},
+			"user": {
+				"references": [
+					"aws_iam_user.this[0].name",
+					"aws_iam_user.this[0]",
+					"aws_iam_user.this",
+				],
+			},
+		},
+		"count": {
+			"references": [
+				"var.create_user",
+				"var.create_iam_user_login_profile",
+			],
+		},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "module.iam_user2",
+		"name":                "this",
+		"provider_config_key": "module.iam_user2:aws",
+		"provisioners":        [],
+		"type":                "aws_iam_user_login_profile",
+	},
+	"module.iam_user2.aws_iam_user_ssh_key.this": {
+		"address": "module.iam_user2.aws_iam_user_ssh_key.this",
+		"config": {
+			"encoding": {
+				"references": [
+					"var.ssh_key_encoding",
+				],
+			},
+			"public_key": {
+				"references": [
+					"var.ssh_public_key",
+				],
+			},
+			"username": {
+				"references": [
+					"aws_iam_user.this[0].name",
+					"aws_iam_user.this[0]",
+					"aws_iam_user.this",
+				],
+			},
+		},
+		"count": {
+			"references": [
+				"var.create_user",
+				"var.upload_iam_user_ssh_key",
+			],
+		},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "module.iam_user2",
+		"name":                "this",
+		"provider_config_key": "module.iam_user2:aws",
+		"provisioners":        [],
+		"type":                "aws_iam_user_ssh_key",
+	},
+}
+
+provisioners = {}
+
+variables = {
+	"module.iam_user2:create_iam_access_key": {
+		"default":        true,
+		"description":    "Whether to create IAM access key",
+		"module_address": "module.iam_user2",
+		"name":           "create_iam_access_key",
+	},
+	"module.iam_user2:create_iam_user_login_profile": {
+		"default":        true,
+		"description":    "Whether to create IAM user login profile",
+		"module_address": "module.iam_user2",
+		"name":           "create_iam_user_login_profile",
+	},
+	"module.iam_user2:create_user": {
+		"default":        true,
+		"description":    "Whether to create the IAM user",
+		"module_address": "module.iam_user2",
+		"name":           "create_user",
+	},
+	"module.iam_user2:force_destroy": {
+		"default":        false,
+		"description":    "When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed.",
+		"module_address": "module.iam_user2",
+		"name":           "force_destroy",
+	},
+	"module.iam_user2:name": {
+		"default":        null,
+		"description":    "Desired name for the IAM user",
+		"module_address": "module.iam_user2",
+		"name":           "name",
+	},
+	"module.iam_user2:password_length": {
+		"default":        20,
+		"description":    "The length of the generated password",
+		"module_address": "module.iam_user2",
+		"name":           "password_length",
+	},
+	"module.iam_user2:password_reset_required": {
+		"default":        true,
+		"description":    "Whether the user should be forced to reset the generated password on first login.",
+		"module_address": "module.iam_user2",
+		"name":           "password_reset_required",
+	},
+	"module.iam_user2:path": {
+		"default":        "/",
+		"description":    "Desired path for the IAM user",
+		"module_address": "module.iam_user2",
+		"name":           "path",
+	},
+	"module.iam_user2:permissions_boundary": {
+		"default":        "",
+		"description":    "The ARN of the policy that is used to set the permissions boundary for the user.",
+		"module_address": "module.iam_user2",
+		"name":           "permissions_boundary",
+	},
+	"module.iam_user2:pgp_key": {
+		"default":        "",
+		"description":    "Either a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Used to encrypt password and access key. `pgp_key` is required when `create_iam_user_login_profile` is set to `true`",
+		"module_address": "module.iam_user2",
+		"name":           "pgp_key",
+	},
+	"module.iam_user2:ssh_key_encoding": {
+		"default":        "SSH",
+		"description":    "Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM",
+		"module_address": "module.iam_user2",
+		"name":           "ssh_key_encoding",
+	},
+	"module.iam_user2:ssh_public_key": {
+		"default":        "",
+		"description":    "The SSH public key. The public key must be encoded in ssh-rsa format or PEM format",
+		"module_address": "module.iam_user2",
+		"name":           "ssh_public_key",
+	},
+	"module.iam_user2:tags": {
+		"default":        {},
+		"description":    "A map of tags to add to all resources.",
+		"module_address": "module.iam_user2",
+		"name":           "tags",
+	},
+	"module.iam_user2:upload_iam_user_ssh_key": {
+		"default":        false,
+		"description":    "Whether to upload a public ssh key to the IAM user",
+		"module_address": "module.iam_user2",
+		"name":           "upload_iam_user_ssh_key",
+	},
+}
+
+outputs = {
+	"iam_user_name": {
+		"depends_on":     [],
+		"description":    "The user's name",
+		"module_address": "",
+		"name":           "iam_user_name",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"module.iam_user2.iam_user_name",
+				"module.iam_user2",
+			],
+		},
+	},
+	"module.iam_user2:iam_access_key_encrypted_secret": {
+		"depends_on":     [],
+		"description":    "The encrypted secret, base64 encoded",
+		"module_address": "module.iam_user2",
+		"name":           "iam_access_key_encrypted_secret",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_access_key.this",
+			],
+		},
+	},
+	"module.iam_user2:iam_access_key_id": {
+		"depends_on":     [],
+		"description":    "The access key ID",
+		"module_address": "module.iam_user2",
+		"name":           "iam_access_key_id",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_access_key.this",
+				"aws_iam_access_key.this_no_pgp",
+			],
+		},
+	},
+	"module.iam_user2:iam_access_key_key_fingerprint": {
+		"depends_on":     [],
+		"description":    "The fingerprint of the PGP key used to encrypt the secret",
+		"module_address": "module.iam_user2",
+		"name":           "iam_access_key_key_fingerprint",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_access_key.this",
+			],
+		},
+	},
+	"module.iam_user2:iam_access_key_secret": {
+		"depends_on":     [],
+		"description":    "The access key secret",
+		"module_address": "module.iam_user2",
+		"name":           "iam_access_key_secret",
+		"sensitive":      true,
+		"value": {
+			"references": [
+				"aws_iam_access_key.this_no_pgp",
+			],
+		},
+	},
+	"module.iam_user2:iam_access_key_ses_smtp_password_v4": {
+		"depends_on":     [],
+		"description":    "The secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm",
+		"module_address": "module.iam_user2",
+		"name":           "iam_access_key_ses_smtp_password_v4",
+		"sensitive":      true,
+		"value": {
+			"references": [
+				"aws_iam_access_key.this",
+				"aws_iam_access_key.this_no_pgp",
+			],
+		},
+	},
+	"module.iam_user2:iam_access_key_status": {
+		"depends_on":     [],
+		"description":    "Active or Inactive. Keys are initially active, but can be made inactive by other means.",
+		"module_address": "module.iam_user2",
+		"name":           "iam_access_key_status",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_access_key.this",
+				"aws_iam_access_key.this_no_pgp",
+			],
+		},
+	},
+	"module.iam_user2:iam_user_arn": {
+		"depends_on":     [],
+		"description":    "The ARN assigned by AWS for this user",
+		"module_address": "module.iam_user2",
+		"name":           "iam_user_arn",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_user.this",
+			],
+		},
+	},
+	"module.iam_user2:iam_user_login_profile_encrypted_password": {
+		"depends_on":     [],
+		"description":    "The encrypted password, base64 encoded",
+		"module_address": "module.iam_user2",
+		"name":           "iam_user_login_profile_encrypted_password",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_user_login_profile.this",
+			],
+		},
+	},
+	"module.iam_user2:iam_user_login_profile_key_fingerprint": {
+		"depends_on":     [],
+		"description":    "The fingerprint of the PGP key used to encrypt the password",
+		"module_address": "module.iam_user2",
+		"name":           "iam_user_login_profile_key_fingerprint",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_user_login_profile.this",
+			],
+		},
+	},
+	"module.iam_user2:iam_user_name": {
+		"depends_on":     [],
+		"description":    "The user's name",
+		"module_address": "module.iam_user2",
+		"name":           "iam_user_name",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_user.this",
+			],
+		},
+	},
+	"module.iam_user2:iam_user_ssh_key_fingerprint": {
+		"depends_on":     [],
+		"description":    "The MD5 message digest of the SSH public key",
+		"module_address": "module.iam_user2",
+		"name":           "iam_user_ssh_key_fingerprint",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_user_ssh_key.this",
+			],
+		},
+	},
+	"module.iam_user2:iam_user_ssh_key_ssh_public_key_id": {
+		"depends_on":     [],
+		"description":    "The unique identifier for the SSH public key",
+		"module_address": "module.iam_user2",
+		"name":           "iam_user_ssh_key_ssh_public_key_id",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_user_ssh_key.this",
+			],
+		},
+	},
+	"module.iam_user2:iam_user_unique_id": {
+		"depends_on":     [],
+		"description":    "The unique ID assigned by AWS",
+		"module_address": "module.iam_user2",
+		"name":           "iam_user_unique_id",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"aws_iam_user.this",
+			],
+		},
+	},
+	"module.iam_user2:keybase_password_decrypt_command": {
+		"depends_on":     [],
+		"description":    "Decrypt user password command",
+		"module_address": "module.iam_user2",
+		"name":           "keybase_password_decrypt_command",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"local.has_encrypted_password",
+				"aws_iam_user_login_profile.this",
+			],
+		},
+	},
+	"module.iam_user2:keybase_password_pgp_message": {
+		"depends_on":     [],
+		"description":    "Encrypted password",
+		"module_address": "module.iam_user2",
+		"name":           "keybase_password_pgp_message",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"local.has_encrypted_password",
+				"aws_iam_user_login_profile.this",
+			],
+		},
+	},
+	"module.iam_user2:keybase_secret_key_decrypt_command": {
+		"depends_on":     [],
+		"description":    "Decrypt access secret key command",
+		"module_address": "module.iam_user2",
+		"name":           "keybase_secret_key_decrypt_command",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"local.has_encrypted_secret",
+				"aws_iam_access_key.this",
+			],
+		},
+	},
+	"module.iam_user2:keybase_secret_key_pgp_message": {
+		"depends_on":     [],
+		"description":    "Encrypted access secret key",
+		"module_address": "module.iam_user2",
+		"name":           "keybase_secret_key_pgp_message",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"local.has_encrypted_secret",
+				"aws_iam_access_key.this",
+			],
+		},
+	},
+	"module.iam_user2:pgp_key": {
+		"depends_on":     [],
+		"description":    "PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted)",
+		"module_address": "module.iam_user2",
+		"name":           "pgp_key",
+		"sensitive":      false,
+		"value": {
+			"references": [
+				"var.pgp_key",
+			],
+		},
+	},
+}
+
+module_calls = {
+	"iam_user2": {
+		"config": {
+			"force_destroy": {
+				"constant_value": true,
+			},
+			"name": {
+				"constant_value": "dummy",
+			},
+		},
+		"count":              {},
+		"depends_on":         [],
+		"for_each":           {},
+		"module_address":     "",
+		"name":               "iam_user2",
+		"source":             "terraform-aws-modules/iam/aws//modules/iam-user",
+		"version_constraint": "4.9.0",
+	},
+}
+
+strip_index = func(addr) {
+	s = strings.split(addr, ".")
+	for s as i, v {
+		s[i] = strings.split(v, "[")[0]
+	}
+
+	return strings.join(s, ".")
+}

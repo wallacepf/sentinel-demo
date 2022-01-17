@@ -1,0 +1,230 @@
+import "strings"
+import "types"
+
+_modules = {
+	"root": {
+		"data":      {},
+		"path":      [],
+		"resources": {},
+	},
+
+	"module.iam_user2": {
+		"data": {},
+		"path": [
+			"iam_user2",
+		],
+		"resources": {
+			"aws_iam_access_key": {
+				"this_no_pgp": {
+					0: {
+						"applied": {
+							"pgp_key": null,
+							"status":  "Active",
+							"user":    "dummy",
+						},
+						"destroy": false,
+						"diff": {
+							"create_date": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"encrypted_secret": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"encrypted_ses_smtp_password_v4": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"key_fingerprint": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"pgp_key": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"secret": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"ses_smtp_password_v4": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"status": {
+								"computed": false,
+								"new":      "Active",
+								"old":      "",
+							},
+							"user": {
+								"computed": false,
+								"new":      "dummy",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+			"aws_iam_user": {
+				"this": {
+					0: {
+						"applied": {
+							"force_destroy":        true,
+							"name":                 "dummy",
+							"path":                 "/",
+							"permissions_boundary": "",
+							"tags":                 null,
+						},
+						"destroy": false,
+						"diff": {
+							"arn": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"force_destroy": {
+								"computed": false,
+								"new":      "true",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"name": {
+								"computed": false,
+								"new":      "dummy",
+								"old":      "",
+							},
+							"path": {
+								"computed": false,
+								"new":      "/",
+								"old":      "",
+							},
+							"permissions_boundary": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"tags": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"tags_all.%": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"unique_id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+			"aws_iam_user_login_profile": {
+				"this": {
+					0: {
+						"applied": {
+							"password_length":         20,
+							"password_reset_required": true,
+							"pgp_key":                 "",
+							"user":                    "dummy",
+						},
+						"destroy": false,
+						"diff": {
+							"encrypted_password": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"key_fingerprint": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"password_length": {
+								"computed": false,
+								"new":      "20",
+								"old":      "",
+							},
+							"password_reset_required": {
+								"computed": false,
+								"new":      "true",
+								"old":      "",
+							},
+							"pgp_key": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"user": {
+								"computed": false,
+								"new":      "dummy",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+		},
+	},
+}
+
+module_paths = [
+	[],
+	[
+		"iam_user2",
+	],
+]
+
+terraform_version = "1.1.3"
+
+variables = {}
+
+module = func(path) {
+	if types.type_of(path) is not "list" {
+		error("expected list, got", types.type_of(path))
+	}
+
+	if length(path) < 1 {
+		return _modules.root
+	}
+
+	addr = []
+	for path as p {
+		append(addr, "module")
+		append(addr, p)
+	}
+
+	return _modules[strings.join(addr, ".")]
+}
+
+data = _modules.root.data
+path = _modules.root.path
+resources = _modules.root.resources
