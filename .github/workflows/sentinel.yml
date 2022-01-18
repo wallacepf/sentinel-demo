@@ -1,5 +1,5 @@
 name: sentinel-pipe
-on: ["push"]
+on: push
 jobs:
   test-sentinel-policy:
     runs-on: ubuntu-latest
