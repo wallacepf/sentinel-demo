@@ -126,7 +126,7 @@ resource_changes = {
 		"module_address": "module.iam_user",
 		"name":           "this",
 		"provider_name":  "registry.terraform.io/hashicorp/aws",
-		"type":           "aws_iam_key",
+		"type":           "aws_iam_user",
 	},
 	"module.iam_user.aws_iam_user_login_profile.this[0]": {
 		"address": "module.iam_user.aws_iam_user_login_profile.this[0]",

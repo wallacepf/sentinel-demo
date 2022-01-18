@@ -1,27 +1,32 @@
 terraform {
-    cloud {
-        organization = "my-demo-account"
+  cloud {
+    organization = "my-demo-account"
 
-        workspaces {
-            name = "sentinel-iam-demo"
-        }
+    workspaces {
+      name = "sentinel-iam-demo"
     }
+  }
 }
 
 provider "aws" {
-    region = "us-east-1"
+  region = "us-east-1"
 }
 
-// module "iam_user2" {
-//   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
-//   version = "4.9.0"
-  
-//   name = "dummy"
-//   force_destroy = true 
-//     create_iam_user_login_profile = false
-//   create_iam_access_key         = true
+module "iam_user2" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-user"
+  version = "4.9.0"
+
+  name                          = "dummy"
+  force_destroy                 = true
+  create_iam_user_login_profile = false
+  create_iam_access_key         = true
+}
+
+// resource "aws_iam_user" "dummer" {
+//     name = "dummer"
+//     force_destroy = true
 // }
 
-resource "null_resource" "teste" {
-    
-}
+// resource "null_resource" "teste" {
+
+// }
