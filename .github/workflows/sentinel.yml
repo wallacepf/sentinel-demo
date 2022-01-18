@@ -6,15 +6,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Sentinel
+        working-directory: ./policies
         run: |
           curl https://releases.hashicorp.com/sentinel/0.18.4/sentinel_0.18.4_linux_amd64.zip --output sentinel.zip
           unzip sentinel.zip
       - name: Sentinel Version
+        working-directory: ./policies
         run: ./sentinel version
       - name: Sentinel Format
-        run: ./sentinel fmt *.sentinel
+        working-directory: ./policies
+        run: ./sentinel fmt */*.sentinel
       - name: Run Sentinel Policy Tests
-        run: ./sentinel test
+        working-directory: ./policies
+        run: ./sentinel test */
   create-policy-set:
     needs: test-sentinel-policy
     runs-on: ubuntu-latest
