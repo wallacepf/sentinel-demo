@@ -24,13 +24,18 @@ jobs:
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           sudo apt-get update && sudo apt-get install terraform
-      - name: Setup VARS
-        working-directory: ./tf/sentinel-policy-creation
-        run: |
-          echo "token = \"${TFE_TOKEN}\"" > terraform.auto.tfvars
-          echo "vcs_oauth_key = \"${VCS_OAUTH_KEY}\"" >> terraform.auto.tfvars
-          terraform fmt
-          cat terraform.auto.tfvars
+          cat <<EOF > .terraformrc
+          credentials "app.terraform.io" {
+             token = "${{ secrets.TF_API_TOKEN }}"   
+          }
+
+      # - name: Setup VARS
+        # working-directory: ./tf/sentinel-policy-creation
+        # run: |
+        #   echo "token = \"${TFE_TOKEN}\"" > terraform.auto.tfvars
+        #   echo "vcs_oauth_key = \"${VCS_OAUTH_KEY}\"" >> terraform.auto.tfvars
+        #   terraform fmt
+        #   cat terraform.auto.tfvars
       - name: Terraform Format
         working-directory: ./tf/sentinel-policy-creation
       #   id: fmt

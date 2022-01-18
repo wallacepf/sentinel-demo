@@ -4,3 +4,5 @@ tf/*/*.tfstate
 .sentinel
 *.tfvars
 *.auto.tfvars
+.terraformrc
+.terraform.rc
