@@ -2,3 +2,5 @@ tf/*/.terraform
 tf/*/*.lock*
 tf/*/*.tfstate
 .sentinel
+*.tfvars
+*.auto.tfvars
