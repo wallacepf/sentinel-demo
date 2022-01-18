@@ -8,9 +8,7 @@ terraform {
 
 }
 
-provider "tfe" {
-  token = var.token
-}
+provider "tfe" {}
 
 resource "tfe_policy_set" "test" {
   name         = "deny-iam-user-creation"

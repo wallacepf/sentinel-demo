@@ -26,9 +26,10 @@ jobs:
           sudo apt-get update && sudo apt-get install terraform
           cat <<EOF > .terraformrc
           credentials "app.terraform.io" {
-             token = "${{ secrets.TF_API_TOKEN }}"   
+              token = "${{ secrets.TF_API_TOKEN }}"   
           }
-
+          EOF
+          cp .terraformrc ~/
       # - name: Setup VARS
         # working-directory: ./tf/sentinel-policy-creation
         # run: |
@@ -52,7 +53,7 @@ jobs:
         working-directory: ./tf/sentinel-policy-creation
       #   id: plan
       #   if: github.event_name == 'pull_request'
-        run: terraform plan -no-color
+        run: terraform plan -no-color -var="vcs_oauth_key=${{ secrets.VCS_OAUTH_KEY }}"
       #   continue-on-error: true
       # - name: Update Pull Request
       #   uses: actions/github-script@0.9.0
