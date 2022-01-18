@@ -88,12 +88,10 @@ jobs:
       #   working-directory: ./tf/sentinel-policy-creation
       #   if: steps.plan.outcome == 'failure'
       #   run: exit 1
-      # - name: Terraform Apply
-      #   env:
-      #     TF_VAR_vcs_oauth_key: ${{ secrets.VCS_OAUTH_KEY }}
-      #   working-directory: ./tf/sentinel-policy-creation
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #   run: terraform apply -auto-approve
+      - name: Terraform Apply
+        working-directory: ./tf/sentinel-policy-creation
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -var="vcs_oauth_key=${{ secrets.VCS_OAUTH_KEY }}" -auto-approve 
 
 
 
