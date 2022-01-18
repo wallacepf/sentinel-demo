@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "tfe" {
-    token = var.token
+  token = var.token
 }
 
 resource "tfe_policy_set" "test" {
