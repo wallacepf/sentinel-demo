@@ -21,12 +21,12 @@ jobs:
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           sudo apt-get update && sudo apt-get install terraform
-          # cat <<EOF > .terraformrc
-          # credentials "app.terraform.io" {
-          #     token = "${{ secrets.TF_API_TOKEN }}"   
-          # }
-          # EOF
-          # cp .terraformrc ~/
+          cat <<EOF > .terraformrc
+          credentials "app.terraform.io" {
+              token = "${{ secrets.TF_API_TOKEN }}"   
+          }
+          EOF
+          cp .terraformrc ~/
       - name: Terraform Format
         working-directory: ./tf/sentinel-policy-creation
         run: terraform fmt -check
