@@ -1,11 +1,11 @@
 terraform {
   cloud {
     organization = "my-demo-account"
-
     workspaces {
       name = "policy-set-auto-creation"
     }
   }
+
 }
 
 provider "tfe" {}
