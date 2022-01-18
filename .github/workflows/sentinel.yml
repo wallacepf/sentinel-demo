@@ -30,6 +30,7 @@ jobs:
           echo "token = \"${TFE_TOKEN}\"" > terraform.auto.tfvars
           echo "vcs_oauth_key = \"${VCS_OAUTH_KEY}\"" >> terraform.auto.tfvars
           terraform fmt
+          cat terraform.auto.tfvars
       - name: Terraform Format
         working-directory: ./tf/sentinel-policy-creation
       #   id: fmt
