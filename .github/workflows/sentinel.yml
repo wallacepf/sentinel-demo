@@ -13,9 +13,6 @@ jobs:
   create-policy-set:
     needs: test-sentinel-policy
     runs-on: ubuntu-latest
-    env:
-      TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      VCS_OAUTH_KEY: ${{ secrets.VCS_OAUTH_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -30,24 +27,14 @@ jobs:
           }
           EOF
           cp .terraformrc ~/
-      # - name: Setup VARS
-        # working-directory: ./tf/sentinel-policy-creation
-        # run: |
-        #   echo "token = \"${TFE_TOKEN}\"" > terraform.auto.tfvars
-        #   echo "vcs_oauth_key = \"${VCS_OAUTH_KEY}\"" >> terraform.auto.tfvars
-        #   terraform fmt
-        #   cat terraform.auto.tfvars
       - name: Terraform Format
         working-directory: ./tf/sentinel-policy-creation
-      #   id: fmt
         run: terraform fmt -check
       - name: Terraform Init
         working-directory: ./tf/sentinel-policy-creation
-        # id: init
         run: terraform init
       - name: Terraform Validate
         working-directory: ./tf/sentinel-policy-creation
-        # id: validate
         run: terraform validate -no-color
       - name: Terraform Plan
         working-directory: ./tf/sentinel-policy-creation
