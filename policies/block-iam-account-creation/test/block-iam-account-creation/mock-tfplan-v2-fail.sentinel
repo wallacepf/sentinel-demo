@@ -1,0 +1,789 @@
+terraform_version = "1.1.3"
+
+planned_values = {
+	"outputs": {
+		"iam_user_name": {
+			"name":      "iam_user_name",
+			"sensitive": false,
+			"value":     "dummy",
+		},
+	},
+	"resources": {
+		"module.iam_user2.aws_iam_access_key.this_no_pgp[0]": {
+			"address":        "module.iam_user2.aws_iam_access_key.this_no_pgp[0]",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          0,
+			"mode":           "managed",
+			"module_address": "module.iam_user2",
+			"name":           "this_no_pgp",
+			"provider_name":  "registry.terraform.io/hashicorp/aws",
+			"tainted":        false,
+			"type":           "aws_iam_access_key",
+			"values": {
+				"pgp_key": null,
+				"status":  "Active",
+				"user":    "dummy",
+			},
+		},
+		"module.iam_user2.aws_iam_user.this[0]": {
+			"address":        "module.iam_user2.aws_iam_user.this[0]",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          0,
+			"mode":           "managed",
+			"module_address": "module.iam_user2",
+			"name":           "this",
+			"provider_name":  "registry.terraform.io/hashicorp/aws",
+			"tainted":        false,
+			"type":           "aws_iam_user",
+			"values": {
+				"force_destroy":        true,
+				"name":                 "dummy",
+				"path":                 "/",
+				"permissions_boundary": "",
+				"tags":                 null,
+			},
+		},
+		"module.iam_user2.aws_iam_user_login_profile.this[0]": {
+			"address":        "module.iam_user2.aws_iam_user_login_profile.this[0]",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          0,
+			"mode":           "managed",
+			"module_address": "module.iam_user2",
+			"name":           "this",
+			"provider_name":  "registry.terraform.io/hashicorp/aws",
+			"tainted":        false,
+			"type":           "aws_iam_user_login_profile",
+			"values": {
+				"password_length":         20,
+				"password_reset_required": true,
+				"pgp_key":                 "",
+				"user":                    "dummy",
+			},
+		},
+	},
+}
+
+variables = {}
+
+resource_changes = {
+	"module.iam_user2.aws_iam_access_key.this_no_pgp[0]": {
+		"address": "module.iam_user2.aws_iam_access_key.this_no_pgp[0]",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"pgp_key": null,
+				"status":  "Active",
+				"user":    "dummy",
+			},
+			"after_unknown": {
+				"create_date":                    true,
+				"encrypted_secret":               true,
+				"encrypted_ses_smtp_password_v4": true,
+				"id":                   true,
+				"key_fingerprint":      true,
+				"secret":               true,
+				"ses_smtp_password_v4": true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          0,
+		"mode":           "managed",
+		"module_address": "module.iam_user2",
+		"name":           "this_no_pgp",
+		"provider_name":  "registry.terraform.io/hashicorp/aws",
+		"type":           "aws_iam_access_key",
+	},
+	"module.iam_user2.aws_iam_user.this[0]": {
+		"address": "module.iam_user2.aws_iam_user.this[0]",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"force_destroy":        true,
+				"name":                 "dummy",
+				"path":                 "/",
+				"permissions_boundary": "",
+				"tags":                 null,
+			},
+			"after_unknown": {
+				"arn":       true,
+				"id":        true,
+				"tags_all":  true,
+				"unique_id": true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          0,
+		"mode":           "managed",
+		"module_address": "module.iam_user2",
+		"name":           "this",
+		"provider_name":  "registry.terraform.io/hashicorp/aws",
+		"type":           "aws_iam_user",
+	},
+	"module.iam_user2.aws_iam_user_login_profile.this[0]": {
+		"address": "module.iam_user2.aws_iam_user_login_profile.this[0]",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"password_length":         20,
+				"password_reset_required": true,
+				"pgp_key":                 "",
+				"user":                    "dummy",
+			},
+			"after_unknown": {
+				"encrypted_password": true,
+				"id":                 true,
+				"key_fingerprint":    true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          0,
+		"mode":           "managed",
+		"module_address": "module.iam_user2",
+		"name":           "this",
+		"provider_name":  "registry.terraform.io/hashicorp/aws",
+		"type":           "aws_iam_user_login_profile",
+	},
+}
+
+output_changes = {
+	"iam_user_name": {
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after":         "dummy",
+			"after_unknown": false,
+			"before":        null,
+		},
+		"name": "iam_user_name",
+	},
+}
+
+raw = {
+	"configuration": {
+		"provider_config": {
+			"aws": {
+				"expressions": {
+					"region": {
+						"constant_value": "us-east-1",
+					},
+				},
+				"name": "aws",
+			},
+			"module.iam_user2:aws": {
+				"module_address":     "module.iam_user2",
+				"name":               "aws",
+				"version_constraint": ">= 2.50.0",
+			},
+		},
+		"root_module": {
+			"module_calls": {
+				"iam_user2": {
+					"expressions": {
+						"force_destroy": {
+							"constant_value": true,
+						},
+						"name": {
+							"constant_value": "dummy",
+						},
+					},
+					"module": {
+						"outputs": {
+							"iam_access_key_encrypted_secret": {
+								"description": "The encrypted secret, base64 encoded",
+								"expression": {
+									"references": [
+										"aws_iam_access_key.this",
+									],
+								},
+							},
+							"iam_access_key_id": {
+								"description": "The access key ID",
+								"expression": {
+									"references": [
+										"aws_iam_access_key.this",
+										"aws_iam_access_key.this_no_pgp",
+									],
+								},
+							},
+							"iam_access_key_key_fingerprint": {
+								"description": "The fingerprint of the PGP key used to encrypt the secret",
+								"expression": {
+									"references": [
+										"aws_iam_access_key.this",
+									],
+								},
+							},
+							"iam_access_key_secret": {
+								"description": "The access key secret",
+								"expression": {
+									"references": [
+										"aws_iam_access_key.this_no_pgp",
+									],
+								},
+								"sensitive": true,
+							},
+							"iam_access_key_ses_smtp_password_v4": {
+								"description": "The secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm",
+								"expression": {
+									"references": [
+										"aws_iam_access_key.this",
+										"aws_iam_access_key.this_no_pgp",
+									],
+								},
+								"sensitive": true,
+							},
+							"iam_access_key_status": {
+								"description": "Active or Inactive. Keys are initially active, but can be made inactive by other means.",
+								"expression": {
+									"references": [
+										"aws_iam_access_key.this",
+										"aws_iam_access_key.this_no_pgp",
+									],
+								},
+							},
+							"iam_user_arn": {
+								"description": "The ARN assigned by AWS for this user",
+								"expression": {
+									"references": [
+										"aws_iam_user.this",
+									],
+								},
+							},
+							"iam_user_login_profile_encrypted_password": {
+								"description": "The encrypted password, base64 encoded",
+								"expression": {
+									"references": [
+										"aws_iam_user_login_profile.this",
+									],
+								},
+							},
+							"iam_user_login_profile_key_fingerprint": {
+								"description": "The fingerprint of the PGP key used to encrypt the password",
+								"expression": {
+									"references": [
+										"aws_iam_user_login_profile.this",
+									],
+								},
+							},
+							"iam_user_name": {
+								"description": "The user's name",
+								"expression": {
+									"references": [
+										"aws_iam_user.this",
+									],
+								},
+							},
+							"iam_user_ssh_key_fingerprint": {
+								"description": "The MD5 message digest of the SSH public key",
+								"expression": {
+									"references": [
+										"aws_iam_user_ssh_key.this",
+									],
+								},
+							},
+							"iam_user_ssh_key_ssh_public_key_id": {
+								"description": "The unique identifier for the SSH public key",
+								"expression": {
+									"references": [
+										"aws_iam_user_ssh_key.this",
+									],
+								},
+							},
+							"iam_user_unique_id": {
+								"description": "The unique ID assigned by AWS",
+								"expression": {
+									"references": [
+										"aws_iam_user.this",
+									],
+								},
+							},
+							"keybase_password_decrypt_command": {
+								"description": "Decrypt user password command",
+								"expression": {
+									"references": [
+										"local.has_encrypted_password",
+										"aws_iam_user_login_profile.this",
+									],
+								},
+							},
+							"keybase_password_pgp_message": {
+								"description": "Encrypted password",
+								"expression": {
+									"references": [
+										"local.has_encrypted_password",
+										"aws_iam_user_login_profile.this",
+									],
+								},
+							},
+							"keybase_secret_key_decrypt_command": {
+								"description": "Decrypt access secret key command",
+								"expression": {
+									"references": [
+										"local.has_encrypted_secret",
+										"aws_iam_access_key.this",
+									],
+								},
+							},
+							"keybase_secret_key_pgp_message": {
+								"description": "Encrypted access secret key",
+								"expression": {
+									"references": [
+										"local.has_encrypted_secret",
+										"aws_iam_access_key.this",
+									],
+								},
+							},
+							"pgp_key": {
+								"description": "PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted)",
+								"expression": {
+									"references": [
+										"var.pgp_key",
+									],
+								},
+							},
+						},
+						"resources": [
+							{
+								"address": "aws_iam_access_key.this",
+								"count_expression": {
+									"references": [
+										"var.create_user",
+										"var.create_iam_access_key",
+										"var.pgp_key",
+									],
+								},
+								"expressions": {
+									"pgp_key": {
+										"references": [
+											"var.pgp_key",
+										],
+									},
+									"user": {
+										"references": [
+											"aws_iam_user.this[0].name",
+											"aws_iam_user.this[0]",
+											"aws_iam_user.this",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "this",
+								"provider_config_key": "iam_user2:aws",
+								"schema_version":      0,
+								"type":                "aws_iam_access_key",
+							},
+							{
+								"address": "aws_iam_access_key.this_no_pgp",
+								"count_expression": {
+									"references": [
+										"var.create_user",
+										"var.create_iam_access_key",
+										"var.pgp_key",
+									],
+								},
+								"expressions": {
+									"user": {
+										"references": [
+											"aws_iam_user.this[0].name",
+											"aws_iam_user.this[0]",
+											"aws_iam_user.this",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "this_no_pgp",
+								"provider_config_key": "iam_user2:aws",
+								"schema_version":      0,
+								"type":                "aws_iam_access_key",
+							},
+							{
+								"address": "aws_iam_user.this",
+								"count_expression": {
+									"references": [
+										"var.create_user",
+									],
+								},
+								"expressions": {
+									"force_destroy": {
+										"references": [
+											"var.force_destroy",
+										],
+									},
+									"name": {
+										"references": [
+											"var.name",
+										],
+									},
+									"path": {
+										"references": [
+											"var.path",
+										],
+									},
+									"permissions_boundary": {
+										"references": [
+											"var.permissions_boundary",
+										],
+									},
+									"tags": {
+										"references": [
+											"var.tags",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "this",
+								"provider_config_key": "iam_user2:aws",
+								"schema_version":      0,
+								"type":                "aws_iam_user",
+							},
+							{
+								"address": "aws_iam_user_login_profile.this",
+								"count_expression": {
+									"references": [
+										"var.create_user",
+										"var.create_iam_user_login_profile",
+									],
+								},
+								"expressions": {
+									"password_length": {
+										"references": [
+											"var.password_length",
+										],
+									},
+									"password_reset_required": {
+										"references": [
+											"var.password_reset_required",
+										],
+									},
+									"pgp_key": {
+										"references": [
+											"var.pgp_key",
+										],
+									},
+									"user": {
+										"references": [
+											"aws_iam_user.this[0].name",
+											"aws_iam_user.this[0]",
+											"aws_iam_user.this",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "this",
+								"provider_config_key": "iam_user2:aws",
+								"schema_version":      0,
+								"type":                "aws_iam_user_login_profile",
+							},
+							{
+								"address": "aws_iam_user_ssh_key.this",
+								"count_expression": {
+									"references": [
+										"var.create_user",
+										"var.upload_iam_user_ssh_key",
+									],
+								},
+								"expressions": {
+									"encoding": {
+										"references": [
+											"var.ssh_key_encoding",
+										],
+									},
+									"public_key": {
+										"references": [
+											"var.ssh_public_key",
+										],
+									},
+									"username": {
+										"references": [
+											"aws_iam_user.this[0].name",
+											"aws_iam_user.this[0]",
+											"aws_iam_user.this",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "this",
+								"provider_config_key": "iam_user2:aws",
+								"schema_version":      0,
+								"type":                "aws_iam_user_ssh_key",
+							},
+						],
+						"variables": {
+							"create_iam_access_key": {
+								"default":     true,
+								"description": "Whether to create IAM access key",
+							},
+							"create_iam_user_login_profile": {
+								"default":     true,
+								"description": "Whether to create IAM user login profile",
+							},
+							"create_user": {
+								"default":     true,
+								"description": "Whether to create the IAM user",
+							},
+							"force_destroy": {
+								"default":     false,
+								"description": "When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed.",
+							},
+							"name": {
+								"description": "Desired name for the IAM user",
+							},
+							"password_length": {
+								"default":     20,
+								"description": "The length of the generated password",
+							},
+							"password_reset_required": {
+								"default":     true,
+								"description": "Whether the user should be forced to reset the generated password on first login.",
+							},
+							"path": {
+								"default":     "/",
+								"description": "Desired path for the IAM user",
+							},
+							"permissions_boundary": {
+								"default":     "",
+								"description": "The ARN of the policy that is used to set the permissions boundary for the user.",
+							},
+							"pgp_key": {
+								"default":     "",
+								"description": "Either a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Used to encrypt password and access key. `pgp_key` is required when `create_iam_user_login_profile` is set to `true`",
+							},
+							"ssh_key_encoding": {
+								"default":     "SSH",
+								"description": "Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM",
+							},
+							"ssh_public_key": {
+								"default":     "",
+								"description": "The SSH public key. The public key must be encoded in ssh-rsa format or PEM format",
+							},
+							"tags": {
+								"default":     {},
+								"description": "A map of tags to add to all resources.",
+							},
+							"upload_iam_user_ssh_key": {
+								"default":     false,
+								"description": "Whether to upload a public ssh key to the IAM user",
+							},
+						},
+					},
+					"source":             "terraform-aws-modules/iam/aws//modules/iam-user",
+					"version_constraint": "4.9.0",
+				},
+			},
+			"outputs": {
+				"iam_user_name": {
+					"description": "The user's name",
+					"expression": {
+						"references": [
+							"module.iam_user2.iam_user_name",
+							"module.iam_user2",
+						],
+					},
+				},
+			},
+		},
+	},
+	"format_version": "1.0",
+	"output_changes": {
+		"iam_user_name": {
+			"actions": [
+				"create",
+			],
+			"after":            "dummy",
+			"after_sensitive":  false,
+			"after_unknown":    false,
+			"before":           null,
+			"before_sensitive": false,
+		},
+	},
+	"planned_values": {
+		"outputs": {
+			"iam_user_name": {
+				"sensitive": false,
+				"value":     "dummy",
+			},
+		},
+		"root_module": {
+			"child_modules": [
+				{
+					"address": "module.iam_user2",
+					"resources": [
+						{
+							"address":          "module.iam_user2.aws_iam_access_key.this_no_pgp[0]",
+							"index":            0,
+							"mode":             "managed",
+							"name":             "this_no_pgp",
+							"provider_name":    "registry.terraform.io/hashicorp/aws",
+							"schema_version":   0,
+							"sensitive_values": {},
+							"type":             "aws_iam_access_key",
+							"values": {
+								"pgp_key": null,
+								"status":  "Active",
+								"user":    "dummy",
+							},
+						},
+						{
+							"address":        "module.iam_user2.aws_iam_user.this[0]",
+							"index":          0,
+							"mode":           "managed",
+							"name":           "this",
+							"provider_name":  "registry.terraform.io/hashicorp/aws",
+							"schema_version": 0,
+							"sensitive_values": {
+								"tags_all": {},
+							},
+							"type": "aws_iam_user",
+							"values": {
+								"force_destroy":        true,
+								"name":                 "dummy",
+								"path":                 "/",
+								"permissions_boundary": "",
+								"tags":                 null,
+							},
+						},
+						{
+							"address":          "module.iam_user2.aws_iam_user_login_profile.this[0]",
+							"index":            0,
+							"mode":             "managed",
+							"name":             "this",
+							"provider_name":    "registry.terraform.io/hashicorp/aws",
+							"schema_version":   0,
+							"sensitive_values": {},
+							"type":             "aws_iam_user_login_profile",
+							"values": {
+								"password_length":         20,
+								"password_reset_required": true,
+								"pgp_key":                 "",
+								"user":                    "dummy",
+							},
+						},
+					],
+				},
+			],
+		},
+	},
+	"prior_state": {
+		"format_version":    "1.0",
+		"terraform_version": "1.1.3",
+		"values": {
+			"outputs": {
+				"iam_user_name": {
+					"sensitive": false,
+					"value":     "dummy",
+				},
+			},
+			"root_module": {},
+		},
+	},
+	"resource_changes": [
+		{
+			"address": "module.iam_user2.aws_iam_access_key.this_no_pgp[0]",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"pgp_key": null,
+					"status":  "Active",
+					"user":    "dummy",
+				},
+				"after_sensitive": {
+					"secret":               true,
+					"ses_smtp_password_v4": true,
+				},
+				"after_unknown": {
+					"create_date":                    true,
+					"encrypted_secret":               true,
+					"encrypted_ses_smtp_password_v4": true,
+					"id":                   true,
+					"key_fingerprint":      true,
+					"secret":               true,
+					"ses_smtp_password_v4": true,
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"index":          0,
+			"mode":           "managed",
+			"module_address": "module.iam_user2",
+			"name":           "this_no_pgp",
+			"provider_name":  "registry.terraform.io/hashicorp/aws",
+			"type":           "aws_iam_access_key",
+		},
+		{
+			"address": "module.iam_user2.aws_iam_user.this[0]",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"force_destroy":        true,
+					"name":                 "dummy",
+					"path":                 "/",
+					"permissions_boundary": "",
+					"tags":                 null,
+				},
+				"after_sensitive": {
+					"tags_all": {},
+				},
+				"after_unknown": {
+					"arn":       true,
+					"id":        true,
+					"tags_all":  true,
+					"unique_id": true,
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"index":          0,
+			"mode":           "managed",
+			"module_address": "module.iam_user2",
+			"name":           "this",
+			"provider_name":  "registry.terraform.io/hashicorp/aws",
+			"type":           "aws_iam_user",
+		},
+		{
+			"address": "module.iam_user2.aws_iam_user_login_profile.this[0]",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"password_length":         20,
+					"password_reset_required": true,
+					"pgp_key":                 "",
+					"user":                    "dummy",
+				},
+				"after_sensitive": {},
+				"after_unknown": {
+					"encrypted_password": true,
+					"id":                 true,
+					"key_fingerprint":    true,
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"index":          0,
+			"mode":           "managed",
+			"module_address": "module.iam_user2",
+			"name":           "this",
+			"provider_name":  "registry.terraform.io/hashicorp/aws",
+			"type":           "aws_iam_user_login_profile",
+		},
+	],
+	"terraform_version": "1.1.3",
+}
