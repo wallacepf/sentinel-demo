@@ -9,8 +9,13 @@ terraform {
 }
 
 provider "aws" {
-    region = "us-east-1"
+  region = "us-east-1"
 }
+
+resource "random_pet" "bucket" {
+
+}
+
 
 resource "aws_kms_key" "objects" {
   description             = "KMS key is used to encrypt bucket objects"
@@ -20,8 +25,8 @@ resource "aws_kms_key" "objects" {
 module "s3_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
-  bucket = "my-s3-bucket"
-  acl    = "private"
+  bucket        = "my-demo-s3-${random_pet.bucket.id}"
+  acl           = "private"
   force_destroy = true
 
   versioning = {
