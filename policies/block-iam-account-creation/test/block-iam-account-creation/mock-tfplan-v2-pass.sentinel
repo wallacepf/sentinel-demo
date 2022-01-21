@@ -9,13 +9,13 @@ planned_values = {
 		},
 	},
 	"resources": {
-		"module.iam_user.aws_iam_access_key.this_no_pgp[0]": {
-			"address":        "module.iam_user.aws_iam_access_key.this_no_pgp[0]",
+		"module.iam_user2.aws_iam_access_key.this_no_pgp[0]": {
+			"address":        "module.iam_user2.aws_iam_access_key.this_no_pgp[0]",
 			"depends_on":     [],
 			"deposed_key":    "",
 			"index":          0,
 			"mode":           "managed",
-			"module_address": "module.iam_user",
+			"module_address": "module.iam_user2",
 			"name":           "this_no_pgp",
 			"provider_name":  "registry.terraform.io/hashicorp/aws",
 			"tainted":        false,
@@ -26,13 +26,13 @@ planned_values = {
 				"user":    "dummy",
 			},
 		},
-		"module.iam_user.aws_iam_user.this[0]": {
-			"address":        "module.iam_user.aws_iam_user.this[0]",
+		"module.iam_user2.aws_iam_user.this[0]": {
+			"address":        "module.iam_user2.aws_iam_user.this[0]",
 			"depends_on":     [],
 			"deposed_key":    "",
 			"index":          0,
 			"mode":           "managed",
-			"module_address": "module.iam_user",
+			"module_address": "module.iam_user2",
 			"name":           "this",
 			"provider_name":  "registry.terraform.io/hashicorp/aws",
 			"tainted":        false,
@@ -45,13 +45,13 @@ planned_values = {
 				"tags":                 null,
 			},
 		},
-		"module.iam_user.aws_iam_user_login_profile.this[0]": {
-			"address":        "module.iam_user.aws_iam_user_login_profile.this[0]",
+		"module.iam_user2.aws_iam_user_login_profile.this[0]": {
+			"address":        "module.iam_user2.aws_iam_user_login_profile.this[0]",
 			"depends_on":     [],
 			"deposed_key":    "",
 			"index":          0,
 			"mode":           "managed",
-			"module_address": "module.iam_user",
+			"module_address": "module.iam_user2",
 			"name":           "this",
 			"provider_name":  "registry.terraform.io/hashicorp/aws",
 			"tainted":        false,
@@ -69,8 +69,8 @@ planned_values = {
 variables = {}
 
 resource_changes = {
-	"module.iam_user.aws_iam_access_key.this_no_pgp[0]": {
-		"address": "module.iam_user.aws_iam_access_key.this_no_pgp[0]",
+	"module.iam_user2.aws_iam_access_key.this_no_pgp[0]": {
+		"address": "module.iam_user2.aws_iam_access_key.this_no_pgp[0]",
 		"change": {
 			"actions": [
 				"create",
@@ -94,13 +94,13 @@ resource_changes = {
 		"deposed":        "",
 		"index":          0,
 		"mode":           "managed",
-		"module_address": "module.iam_user",
+		"module_address": "module.iam_user2",
 		"name":           "this_no_pgp",
 		"provider_name":  "registry.terraform.io/hashicorp/aws",
 		"type":           "aws_iam_access_key",
 	},
-	"module.iam_user.aws_iam_user.this[0]": {
-		"address": "module.iam_user.aws_iam_user.this[0]",
+	"module.iam_user2.aws_iam_user.this[0]": {
+		"address": "module.iam_user2.aws_iam_user.this[0]",
 		"change": {
 			"actions": [
 				"create",
@@ -123,13 +123,13 @@ resource_changes = {
 		"deposed":        "",
 		"index":          0,
 		"mode":           "managed",
-		"module_address": "module.iam_user",
+		"module_address": "module.iam_user2",
 		"name":           "this",
 		"provider_name":  "registry.terraform.io/hashicorp/aws",
-		"type":           "aws_iam_user",
+		"type":           "aws_iam_demo",
 	},
-	"module.iam_user.aws_iam_user_login_profile.this[0]": {
-		"address": "module.iam_user.aws_iam_user_login_profile.this[0]",
+	"module.iam_user2.aws_iam_user_login_profile.this[0]": {
+		"address": "module.iam_user2.aws_iam_user_login_profile.this[0]",
 		"change": {
 			"actions": [
 				"create",
@@ -150,7 +150,7 @@ resource_changes = {
 		"deposed":        "",
 		"index":          0,
 		"mode":           "managed",
-		"module_address": "module.iam_user",
+		"module_address": "module.iam_user2",
 		"name":           "this",
 		"provider_name":  "registry.terraform.io/hashicorp/aws",
 		"type":           "aws_iam_user_login_profile",
@@ -182,15 +182,15 @@ raw = {
 				},
 				"name": "aws",
 			},
-			"module.iam_user:aws": {
-				"module_address":     "module.iam_user",
+			"module.iam_user2:aws": {
+				"module_address":     "module.iam_user2",
 				"name":               "aws",
 				"version_constraint": ">= 2.50.0",
 			},
 		},
 		"root_module": {
 			"module_calls": {
-				"iam_user": {
+				"iam_user2": {
 					"expressions": {
 						"force_destroy": {
 							"constant_value": true,
@@ -381,7 +381,7 @@ raw = {
 								},
 								"mode":                "managed",
 								"name":                "this",
-								"provider_config_key": "iam_user:aws",
+								"provider_config_key": "iam_user2:aws",
 								"schema_version":      0,
 								"type":                "aws_iam_access_key",
 							},
@@ -405,7 +405,7 @@ raw = {
 								},
 								"mode":                "managed",
 								"name":                "this_no_pgp",
-								"provider_config_key": "iam_user:aws",
+								"provider_config_key": "iam_user2:aws",
 								"schema_version":      0,
 								"type":                "aws_iam_access_key",
 							},
@@ -445,7 +445,7 @@ raw = {
 								},
 								"mode":                "managed",
 								"name":                "this",
-								"provider_config_key": "iam_user:aws",
+								"provider_config_key": "iam_user2:aws",
 								"schema_version":      0,
 								"type":                "aws_iam_user",
 							},
@@ -483,7 +483,7 @@ raw = {
 								},
 								"mode":                "managed",
 								"name":                "this",
-								"provider_config_key": "iam_user:aws",
+								"provider_config_key": "iam_user2:aws",
 								"schema_version":      0,
 								"type":                "aws_iam_user_login_profile",
 							},
@@ -516,7 +516,7 @@ raw = {
 								},
 								"mode":                "managed",
 								"name":                "this",
-								"provider_config_key": "iam_user:aws",
+								"provider_config_key": "iam_user2:aws",
 								"schema_version":      0,
 								"type":                "aws_iam_user_ssh_key",
 							},
@@ -588,8 +588,8 @@ raw = {
 					"description": "The user's name",
 					"expression": {
 						"references": [
-							"module.iam_user.iam_user_name",
-							"module.iam_user",
+							"module.iam_user2.iam_user_name",
+							"module.iam_user2",
 						],
 					},
 				},
@@ -619,10 +619,10 @@ raw = {
 		"root_module": {
 			"child_modules": [
 				{
-					"address": "module.iam_user",
+					"address": "module.iam_user2",
 					"resources": [
 						{
-							"address":          "module.iam_user.aws_iam_access_key.this_no_pgp[0]",
+							"address":          "module.iam_user2.aws_iam_access_key.this_no_pgp[0]",
 							"index":            0,
 							"mode":             "managed",
 							"name":             "this_no_pgp",
@@ -637,7 +637,7 @@ raw = {
 							},
 						},
 						{
-							"address":        "module.iam_user.aws_iam_user.this[0]",
+							"address":        "module.iam_user2.aws_iam_user.this[0]",
 							"index":          0,
 							"mode":           "managed",
 							"name":           "this",
@@ -656,7 +656,7 @@ raw = {
 							},
 						},
 						{
-							"address":          "module.iam_user.aws_iam_user_login_profile.this[0]",
+							"address":          "module.iam_user2.aws_iam_user_login_profile.this[0]",
 							"index":            0,
 							"mode":             "managed",
 							"name":             "this",
@@ -691,7 +691,7 @@ raw = {
 	},
 	"resource_changes": [
 		{
-			"address": "module.iam_user.aws_iam_access_key.this_no_pgp[0]",
+			"address": "module.iam_user2.aws_iam_access_key.this_no_pgp[0]",
 			"change": {
 				"actions": [
 					"create",
@@ -719,13 +719,13 @@ raw = {
 			},
 			"index":          0,
 			"mode":           "managed",
-			"module_address": "module.iam_user",
+			"module_address": "module.iam_user2",
 			"name":           "this_no_pgp",
 			"provider_name":  "registry.terraform.io/hashicorp/aws",
 			"type":           "aws_iam_access_key",
 		},
 		{
-			"address": "module.iam_user.aws_iam_user.this[0]",
+			"address": "module.iam_user2.aws_iam_user.this[0]",
 			"change": {
 				"actions": [
 					"create",
@@ -751,13 +751,13 @@ raw = {
 			},
 			"index":          0,
 			"mode":           "managed",
-			"module_address": "module.iam_user",
+			"module_address": "module.iam_user2",
 			"name":           "this",
 			"provider_name":  "registry.terraform.io/hashicorp/aws",
 			"type":           "aws_iam_user",
 		},
 		{
-			"address": "module.iam_user.aws_iam_user_login_profile.this[0]",
+			"address": "module.iam_user2.aws_iam_user_login_profile.this[0]",
 			"change": {
 				"actions": [
 					"create",
@@ -779,7 +779,7 @@ raw = {
 			},
 			"index":          0,
 			"mode":           "managed",
-			"module_address": "module.iam_user",
+			"module_address": "module.iam_user2",
 			"name":           "this",
 			"provider_name":  "registry.terraform.io/hashicorp/aws",
 			"type":           "aws_iam_user_login_profile",
