@@ -1,10 +1,11 @@
 terraform {
-    backend "remote" {
-        organization = "my-demo-account"
-        workspaces {
-            name = "sentinel-s3-demo"
-        }
+  cloud {
+    organization = "my-demo-account"
+
+    workspaces {
+      name = "sentinel-s3-demo"
     }
+  }
 }
 
 provider "aws" {
@@ -21,6 +22,7 @@ module "s3_bucket" {
 
   bucket = "my-s3-bucket"
   acl    = "private"
+  force_destroy = true
 
   versioning = {
     enabled = true
