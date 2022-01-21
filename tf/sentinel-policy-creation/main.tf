@@ -20,7 +20,7 @@ resource "tfe_policy_set" "deny-iam-user-creation" {
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = "improve-iam-policy"
+    branch             = "main"
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }
@@ -34,7 +34,7 @@ resource "tfe_policy_set" "s3-compliance" {
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = "s3-policy"
+    branch             = "main"
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }
