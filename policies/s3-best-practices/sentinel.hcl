@@ -3,12 +3,12 @@ module "tfplan-functions" {
 }
 
 // mock "tfplan/v2" {
-//   module {
-//     source = "./testdata/mock-tfplan-v2.sentinel"
-//   }
+//     module {
+//             source = "testdata/mock-tfplan-v2.sentinel"
+//     }
 // }
 
-policy "deny-iam-user-creation" {
-  source = "./block-iam-account-creation.sentinel"
+policy "s3-best-practices" {
+  source = "./s3-best-practices.sentinel"
   enforcement_level = "hard-mandatory"
 }

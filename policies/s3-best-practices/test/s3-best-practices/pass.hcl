@@ -5,12 +5,12 @@ module "tfplan-functions" {
 
 mock "tfplan/v2" {
     module {
-        source = "mock-tfplan-v2-fail.sentinel"
+        source = "mock-tfplan-v2-pass.sentinel"
     }
 }
 
 test {
     rules = {
-        main = false
+        main = true
     }
 }
