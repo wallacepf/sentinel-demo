@@ -1,0 +1,22 @@
+import "tfplan-functions" as plan
+import "aws-functions" as aws
+
+param resource_types default [
+  "aws_s3_bucket",
+  "aws_instance",
+]
+
+param mandatory_tags default ["Owner", "Purpose"]
+
+
+allAWSResourcesWithStandardTags =
+                          aws.find_resources_with_standard_tags(resource_types)
+
+violatingAWSResources =
+        plan.filter_attribute_not_contains_list(allAWSResourcesWithStandardTags,
+                        "tags", mandatory_tags, true)
+
+
+main = rule {
+  length(violatingAWSResources["messages"]) is 0
+}
