@@ -39,3 +39,29 @@ resource "tfe_policy_set" "s3-compliance" {
     oauth_token_id     = var.vcs_oauth_key
   }
 }
+
+resource "tfe_policy_set" "tag-enforcement" {
+  name          = "tag-enforcement"
+  description   = "Policy Set to enforce tags"
+  organization  = var.org
+  policies_path = "policies/tag-enforcement"
+
+  vcs_repo {
+    identifier         = "wallacepf/sentinel-demo"
+    branch             = "tag-enforcement"
+    ingress_submodules = false
+    oauth_token_id     = var.vcs_oauth_key
+  }
+}
+
+resource "tfe_policy_set_parameter" "resources" {
+  key          = "resource_types"
+  value        = "aws_s3_bucket"
+  policy_set_id = tfe_policy_set.tag-enforcement.id
+}
+
+resource "tfe_policy_set_parameter" "tags" {
+  key          = "mandatory_tags"
+  value        = "Owner"
+  policy_set_id = tfe_policy_set.tag-enforcement.id
+}
