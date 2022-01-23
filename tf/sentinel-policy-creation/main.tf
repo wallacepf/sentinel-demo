@@ -56,12 +56,12 @@ resource "tfe_policy_set" "tag-enforcement" {
 
 resource "tfe_policy_set_parameter" "resources" {
   key          = "resource_types"
-  value        = "aws_s3_bucket"
+  value        = "[\"aws_instance\", \"aws_s3_bucket\"]"
   policy_set_id = tfe_policy_set.tag-enforcement.id
 }
 
 resource "tfe_policy_set_parameter" "tags" {
   key          = "mandatory_tags"
-  value        = "Owner"
+  value        = "[\"Owner\", \"Purpose\"]"
   policy_set_id = tfe_policy_set.tag-enforcement.id
 }
