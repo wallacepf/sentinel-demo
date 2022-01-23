@@ -20,8 +20,16 @@ jobs:
         working-directory: ./policies
         run: ./sentinel test */
   create-policy-set:
+    defaults:
+      run:
+        working-directory: ./tf/tfc-config
     needs: test-sentinel-policy
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_token: ${{ secrets.TF_API_TOKEN }}
+      TF_VAR_vcs_oauth_key: ${{ secrets.VCS_OAUTH_KEY }}
+      TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+      TF_VAR_aws_secret_id: ${{ secrets.AWS_SECRET_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -37,57 +45,27 @@ jobs:
           EOF
           cp .terraformrc ~/
       - name: Terraform Format
-        working-directory: ./tf/sentinel-policy-creation
         run: terraform fmt -check
       - name: Terraform Init
-        working-directory: ./tf/sentinel-policy-creation
         run: terraform init
       - name: Terraform Validate
-        working-directory: ./tf/sentinel-policy-creation
         run: terraform validate -no-color
       - name: Terraform Plan
-        working-directory: ./tf/sentinel-policy-creation
-      #   id: plan
-      #   if: github.event_name == 'pull_request'
         run: terraform plan -no-color -var="vcs_oauth_key=${{ secrets.VCS_OAUTH_KEY }}" -var="token=${{ secrets.TF_API_TOKEN }}"
-      #   continue-on-error: true
-      # - name: Update Pull Request
-      #   uses: actions/github-script@0.9.0
-      #   if: github.event_name == 'pull_request'
-      #   env:
-      #     PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     script: |
-      #       const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-      #       #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-      #       #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-      #       #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-
-      #       <details><summary>Show Plan</summary>
-
-      #       \`\`\`\n
-      #       ${process.env.PLAN}
-      #       \`\`\`
-
-      #       </details>
-
-      #       *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-
-      #       github.issues.createComment({
-      #         issue_number: context.issue.number,
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         body: output
-      #       })
-      # - name: Terraform Plan Status
-      #   working-directory: ./tf/sentinel-policy-creation
-      #   if: steps.plan.outcome == 'failure'
-      #   run: exit 1
-      - name: Terraform Apply
-        working-directory: ./tf/sentinel-policy-creation
+      - name: Terraform apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -var="token=${{ secrets.TF_API_TOKEN }}" -var="vcs_oauth_key=${{ secrets.VCS_OAUTH_KEY }}" -auto-approve 
+        run: terraform apply -auto-approve 
+      # - name: Terraform Apply Dev
+      #   env:
+      #     TF_VAR_token: ${{ secrets.TF_API_TOKEN }}
+      #     TF_VAR_vcs_oauth_key: ${{ secrets.VCS_OAUTH_KEY }}
+      #     TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+      #     TF_VAR_aws_secret_id: ${{ secrets.AWS_SECRET_ID }}
+
+      #   working-directory: ./tf/tfc-config
+      #   if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve 
+
 
 
 
