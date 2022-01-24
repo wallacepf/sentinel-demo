@@ -60,7 +60,7 @@ resource "tfe_policy_set" "vpc_security" {
   description   = "Policy Set to enforce VPC Security"
   organization  = local.org
   policies_path = "policies/vpc-security"
-  workspace_ids = [tfe_workspace.sentinel-vpc-demo.id]
+  workspace_ids = [tfe_workspace.vpc_demo.id]
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
@@ -73,5 +73,5 @@ resource "tfe_policy_set" "vpc_security" {
 resource "tfe_policy_set_parameter" "allowed_subnet" {
   key           = "allowed_subnet"
   value         = "aws_subnet.internal.id"
-  policy_set_id = tfe_policy_set.vpc-security.id
+  policy_set_id = tfe_policy_set.vpc_security.id
 }
