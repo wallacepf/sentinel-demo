@@ -9,6 +9,6 @@ module "tfplan-functions" {
 // }
 
 policy "deny-eip-creation" {
-  source = "./block-iam-account-creation.sentinel"
+  source = "./block-eip-creation.sentinel"
   enforcement_level = "hard-mandatory"
 }
