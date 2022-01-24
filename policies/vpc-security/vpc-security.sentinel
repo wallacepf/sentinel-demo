@@ -1,0 +1,45 @@
+import "tfconfig/v2" as tfconfig
+import "strings"
+
+
+param allowed_subnet
+
+allEC2Instances = filter tfconfig.resources as address, r {
+	r.type is "aws_instance" and
+		r.mode is "managed"
+}
+
+# Function to validate subnet_id of EC2 instances
+validate_subnet_ids = func(instances, allowed) {
+
+	# Set validated
+	validated = true
+
+	# Iterate over instances
+	for instances as address, instance {
+		# Check whether subnet_id was specified with a reference
+		if "subnet_id" not in instance.config {
+			validated = false
+			print("EC2 instance", address, "did not set the subnet_id argument.")
+		} else if "references" not in instance.config.subnet_id {
+			validated = false
+			print("EC2 instance", address, "has subnet_id set to a constant value",
+				instance.config.subnet_id.constant_value)
+		} else if instance.config.subnet_id.references[0] not in allowed {
+			validated = false
+			print("EC2 instance", address, "has subnet_id set to an expression with",
+				"multiple references.")
+		} else {
+			if instance.config.subnet_id.references[0] not in allowed {
+				validated = false
+			}
+		}
+	}
+	return validated
+}
+
+validSubnetIDs = validate_subnet_ids(allEC2Instances, allowed_subnet)
+
+main = rule {
+	validSubnetIDs
+}
