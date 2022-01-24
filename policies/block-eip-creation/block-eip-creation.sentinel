@@ -14,9 +14,9 @@
 
 import "tfplan-functions" as plan
 
-iam_users = plan.find_resources("aws_iam_user")
+eip_creation = plan.find_resources("aws_eip")
 
-validated = length(iam_users) is 0
+validated = length(eip_creation) is 0
 main = rule {
 	validated is true
 }
