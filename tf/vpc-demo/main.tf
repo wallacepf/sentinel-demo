@@ -57,7 +57,7 @@ resource "aws_subnet" "internal" {
   cidr_block        = "10.0.1.0/24"
 
   tags = {
-    Owner = "Demo"
+    Owner   = "Demo"
     Purpose = "Lab"
   }
 }
@@ -68,7 +68,7 @@ resource "aws_subnet" "external" {
   cidr_block        = "10.0.2.0/24"
 
   tags = {
-    Owner = "Demo"
+    Owner   = "Demo"
     Purpose = "Lab"
   }
 }
@@ -78,10 +78,10 @@ resource "aws_instance" "demo_server" {
   instance_type     = "t2.micro"
   availability_zone = data.aws_availability_zones.available.names[0]
   subnet_id         = aws_subnet.internal.id
-  security_groups = module.security_group.security_group_id
+  security_groups   = [module.security_group.security_group_id]
 
   tags = {
-    Owner = "Demo"
+    Owner   = "Demo"
     Purpose = "Lab"
   }
 }
