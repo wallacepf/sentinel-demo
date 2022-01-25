@@ -17,7 +17,7 @@ data "tfe_workspace" "eip_demo" {
   name         = "sentinel-eip-demo-${local.env}"
   organization = local.org
 }
-  
+
 data "tfe_workspace_ids" "prod_wks" {
   tag_names    = ["prod"]
   organization = local.org
