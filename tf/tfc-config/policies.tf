@@ -13,6 +13,11 @@ data "tfe_workspace" "vpc_demo" {
   organization = local.org
 }
 
+data "tfe_workspace" "eip_demo" {
+  name         = "sentinel-eip-demo-${local.env}"
+  organization = local.org
+}
+
 resource "tfe_policy_set" "deny-iam-user-creation" {
   name          = "deny-iam-user-creation-${local.env}"
   description   = "Policy Set to Deny IAM account creation"
@@ -45,9 +50,24 @@ resource "tfe_policy_set" "s3-compliance" {
 
 resource "tfe_policy_set" "tag-enforcement" {
   name          = "tag-enforcement-${local.env}"
-  description   = "Policy Set to enforce tags"
+  description   = "Policy Set to deny tags"
   organization  = local.org
   policies_path = "policies/tag-enforcement"
+  global        = true
+
+  vcs_repo {
+    identifier         = "wallacepf/sentinel-demo"
+    branch             = local.branch
+    ingress_submodules = false
+    oauth_token_id     = var.vcs_oauth_key
+  }
+}
+
+resource "tfe_policy_set" "deny-eip" {
+  name          = "deny-eip-${local.env}"
+  description   = "Policy Set to deny EIP creation"
+  organization  = local.org
+  policies_path = "policies/deny-eip"
   global        = true
 
   vcs_repo {
