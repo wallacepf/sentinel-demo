@@ -13,6 +13,16 @@ data "tfe_workspace" "vpc_demo" {
   organization = local.org
 }
 
+data "tfe_workspace_ids" "prod_wks" {
+  tag_names    = ["prod"]
+  organization = local.org
+}
+
+data "tfe_workspace_ids" "dev_wks" {
+  tag_names    = ["dev"]
+  organization = local.org
+}
+
 resource "tfe_policy_set" "deny-iam-user-creation" {
   name          = "deny-iam-user-creation-${local.env}"
   description   = "Policy Set to Deny IAM account creation"
@@ -48,7 +58,7 @@ resource "tfe_policy_set" "tag-enforcement" {
   description   = "Policy Set to enforce tags"
   organization  = local.org
   policies_path = "policies/tag-enforcement"
-  global        = true
+  workspace_ids = local.env == "prod" ? values(data.tfe_workspace_ids.prod_wks.ids) : values(data.tfe_workspace_ids.dev_wks.ids)
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
