@@ -13,11 +13,11 @@ module "tfplan-functions" {
 
 }
 
-mock "tfplan/v2" {
-    module {
-        source = "testdata/mock-tfplan-v2.sentinel"
-    }
-}
+// mock "tfplan/v2" {
+//     module {
+//         source = "testdata/mock-tfplan-v2.sentinel"
+//     }
+// }
 
 policy "instance-subnet-allowed" {
   source = "./vpc-subnet.sentinel"

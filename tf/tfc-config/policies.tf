@@ -1,5 +1,7 @@
+
+
 resource "tfe_policy_set" "deny-iam-user-creation" {
-  name          = "deny-iam-user-creation"
+  name          = "deny-iam-user-creation-${local.env}"
   description   = "Policy Set to Deny IAM account creation"
   organization  = local.org
   policies_path = "policies/block-iam-account-creation"
@@ -7,14 +9,14 @@ resource "tfe_policy_set" "deny-iam-user-creation" {
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = "main"
+    branch             = var.branch
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }
 }
 
 resource "tfe_policy_set" "s3-compliance" {
-  name          = "s3-compliance"
+  name          = "s3-compliance-${local.env}"
   description   = "Policy Set to guarantee that S3 buckets will be in compliance"
   organization  = local.org
   policies_path = "policies/s3-best-practices"
@@ -22,14 +24,14 @@ resource "tfe_policy_set" "s3-compliance" {
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = "main"
+    branch             = var.branch
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }
 }
 
 resource "tfe_policy_set" "tag-enforcement" {
-  name          = "tag-enforcement"
+  name          = "tag-enforcement-${local.env}"
   description   = "Policy Set to enforce tags"
   organization  = local.org
   policies_path = "policies/tag-enforcement"
@@ -37,7 +39,7 @@ resource "tfe_policy_set" "tag-enforcement" {
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = "main"
+    branch             = var.branch
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }
@@ -56,7 +58,7 @@ resource "tfe_policy_set_parameter" "tags" {
 }
 
 resource "tfe_policy_set" "vpc_security" {
-  name          = "vpc-security"
+  name          = "vpc-security-${local.env}"
   description   = "Policy Set to enforce VPC Security"
   organization  = local.org
   policies_path = "policies/vpc-security"
@@ -64,7 +66,7 @@ resource "tfe_policy_set" "vpc_security" {
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = "main"
+    branch             = var.branch
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }

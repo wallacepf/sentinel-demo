@@ -1,13 +1,3 @@
-terraform {
-  cloud {
-    organization = "my-demo-account"
-
-    workspaces {
-      name = "sentinel-s3-demo"
-    }
-  }
-}
-
 provider "aws" {
   region = "us-east-1"
 }
