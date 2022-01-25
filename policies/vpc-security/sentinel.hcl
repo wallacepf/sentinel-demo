@@ -1,12 +1,6 @@
-mock "tfconfig/v2" {
-    module {
-        source = "testdata/mock-tfconfig-v2.sentinel"
-    }
-}
-
-param "allowed_subnet" {
-    value = "aws_subnet.internal.id"
-}
+// param "allowed_subnet" {
+//     value = "aws_subnet.internal.id"
+// }
 
 module "tfplan-functions" {
     source = "https://raw.githubusercontent.com/hashicorp/terraform-guides/master/governance/third-generation/common-functions/tfplan-functions/tfplan-functions.sentinel"
@@ -16,6 +10,12 @@ module "tfplan-functions" {
 // mock "tfplan/v2" {
 //     module {
 //         source = "testdata/mock-tfplan-v2.sentinel"
+//     }
+// }
+
+// mock "tfconfig/v2" {
+//     module {
+//         source = "testdata/mock-tfconfig-v2.sentinel"
 //     }
 // }
 
