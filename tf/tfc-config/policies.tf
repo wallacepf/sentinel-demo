@@ -1,15 +1,28 @@
+data "tfe_workspace" "iam_demo" {
+  name         = "sentinel-iam-demo-${local.env}"
+  organization = local.org
+}
 
+data "tfe_workspace" "s3_demo" {
+  name         = "sentinel-s3-demo-${local.env}"
+  organization = local.org
+}
+
+data "tfe_workspace" "vpc_demo" {
+  name         = "sentinel-vpc-demo-${local.env}"
+  organization = local.org
+}
 
 resource "tfe_policy_set" "deny-iam-user-creation" {
   name          = "deny-iam-user-creation-${local.env}"
   description   = "Policy Set to Deny IAM account creation"
   organization  = local.org
   policies_path = "policies/block-iam-account-creation"
-  workspace_ids = [tfe_workspace.iam_demo.id]
+  workspace_ids = [data.tfe_workspace.iam_demo.id]
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = var.branch
+    branch             = local.branch
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }
@@ -20,11 +33,11 @@ resource "tfe_policy_set" "s3-compliance" {
   description   = "Policy Set to guarantee that S3 buckets will be in compliance"
   organization  = local.org
   policies_path = "policies/s3-best-practices"
-  workspace_ids = [tfe_workspace.s3_demo.id]
+  workspace_ids = [data.tfe_workspace.s3_demo.id]
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = var.branch
+    branch             = local.branch
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }
@@ -39,7 +52,7 @@ resource "tfe_policy_set" "tag-enforcement" {
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = var.branch
+    branch             = local.branch
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }
@@ -62,11 +75,11 @@ resource "tfe_policy_set" "vpc_security" {
   description   = "Policy Set to enforce VPC Security"
   organization  = local.org
   policies_path = "policies/vpc-security"
-  workspace_ids = [tfe_workspace.vpc_demo.id]
+  workspace_ids = [data.tfe_workspace.vpc_demo.id]
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
-    branch             = var.branch
+    branch             = local.branch
     ingress_submodules = false
     oauth_token_id     = var.vcs_oauth_key
   }

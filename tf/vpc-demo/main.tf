@@ -9,7 +9,7 @@ data "aws_availability_zones" "available" {
 module "security_group" {
   source = "terraform-aws-modules/security-group/aws"
 
-  name   = "my-sg"
+  name   = "my-sg-${random_pet.bucket.id}"
   vpc_id = aws_vpc.demo.id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
