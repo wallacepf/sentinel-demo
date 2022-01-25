@@ -19,15 +19,15 @@ module "security_group" {
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-80-tcp"]
 
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      description = "User-service ports"
-      cidr_blocks = "0.0.0.0/0"
-    }
-  ]
+  // ingress_with_cidr_blocks = [
+  //   {
+  //     from_port   = 22
+  //     to_port     = 22
+  //     protocol    = "tcp"
+  //     description = "User-service ports"
+  //     cidr_blocks = "0.0.0.0/0"
+  //   }
+  // ]
 
   egress_rules = ["all-all"]
 
@@ -65,8 +65,8 @@ resource "aws_subnet" "external" {
 resource "aws_instance" "demo_server" {
   ami               = "ami-02e136e904f3da870"
   instance_type     = "t2.micro"
-  availability_zone = data.aws_availability_zones.available.names[1]
-  subnet_id         = aws_subnet.external.id
+  availability_zone = data.aws_availability_zones.available.names[0]
+  subnet_id         = aws_subnet.internal.id
   security_groups   = [module.security_group.security_group_id]
 
   tags = {
