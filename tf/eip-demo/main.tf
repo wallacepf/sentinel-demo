@@ -17,10 +17,9 @@ module "security_group" {
   vpc_id = aws_vpc.demo.id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp"]
+  ingress_rules       = ["http-80-tcp", "all-icmp"]
   egress_rules        = ["all-all"]
 }
-
 
 
 resource "aws_vpc" "demo" {
@@ -47,6 +46,11 @@ resource "aws_subnet" "external" {
     Owner   = "Demo"
     Purpose = "Lab"
   }
+}
+
+resource "aws_eip" "default" {
+  instance = aws_instance.demo_server.id
+  vpc      = true
 }
 
 resource "aws_instance" "demo_server" {

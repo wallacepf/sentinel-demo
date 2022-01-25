@@ -46,25 +46,46 @@ jobs:
           cp .terraformrc ~/
       - name: Terraform Format
         run: terraform fmt -check
-      - name: Terraform Init
+      - name: Terraform Init Prod
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: main
+          TF_WORKSPACE: tfc-config-prod       
+        run: terraform init
+      - name: Terraform Init Dev
+        if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: main
+          TF_WORKSPACE: tfc-config-dev      
         run: terraform init
       - name: Terraform Validate
         run: terraform validate -no-color
-      - name: Terraform Plan
-        run: terraform plan -no-color -var="vcs_oauth_key=${{ secrets.VCS_OAUTH_KEY }}" -var="token=${{ secrets.TF_API_TOKEN }}"
-      - name: Terraform apply
+      - name: Terraform Plan Prod
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: main
+          TF_WORKSPACE: tfc-config-prod       
+        run: terraform plan -no-color
+      - name: Terraform Plan Dev
+        if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: dev
+          TF_WORKSPACE: tfc-config-dev    
+        run: terraform plan -no-color
+      - name: Terraform apply Prod
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: main
+          TF_WORKSPACE: tfc-config-prod
+        run: |
+          terraform workspace select tfc-config-prod
+          terraform apply -auto-approve 
+      - name: Terraform Apply Dev
+        if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: dev
+          TF_WORKSPACE: tfc-config-dev
         run: terraform apply -auto-approve 
-      # - name: Terraform Apply Dev
-      #   env:
-      #     TF_VAR_token: ${{ secrets.TF_API_TOKEN }}
-      #     TF_VAR_vcs_oauth_key: ${{ secrets.VCS_OAUTH_KEY }}
-      #     TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-      #     TF_VAR_aws_secret_id: ${{ secrets.AWS_SECRET_ID }}
-
-      #   working-directory: ./tf/tfc-config
-      #   if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
-      #   run: terraform apply -auto-approve 
 
 
 

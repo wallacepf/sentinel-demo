@@ -1,18 +1,8 @@
-terraform {
-  cloud {
-    organization = "my-demo-account"
-
-    workspaces {
-      name = "sentinel-s3-demo"
-    }
-  }
-}
-
 provider "aws" {
   region = "us-east-1"
 }
 
-resource "random_pet" "bucket" {
+resource "random_pet" "random" {
 
 }
 
@@ -25,7 +15,7 @@ resource "aws_kms_key" "objects" {
 module "s3_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
-  bucket        = "my-demo-s3-${random_pet.bucket.id}"
+  bucket        = "my-demo-s3-${random_pet.random.id}"
   acl           = "private"
   force_destroy = true
 
@@ -34,7 +24,8 @@ module "s3_bucket" {
   }
 
   tags = {
-    Owner = "Dev"
+    Owner   = "Dev"
+    Purpose = "Demo"
   }
 
   server_side_encryption_configuration = {

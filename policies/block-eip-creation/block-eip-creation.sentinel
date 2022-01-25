@@ -1,0 +1,22 @@
+# import "tfplan/v2" as tfplan
+
+# iam_resource = filter tfplan.resource_changes as _, rc {
+#  rc.type is "aws_iam_user" and
+#   (rc.change.actions contains "create" or rc.change.actions is ["update"])
+
+# }
+
+# print(iam_resource)
+
+# main = rule {
+#  iam_resource is empty
+# }
+
+import "tfplan-functions" as plan
+
+eip_creation = plan.find_resources("aws_eip")
+
+validated = length(eip_creation) is 0
+main = rule {
+	validated is true
+}
