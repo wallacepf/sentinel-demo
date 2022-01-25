@@ -77,9 +77,7 @@ jobs:
         env:
           TF_VAR_branch: main
           TF_WORKSPACE: tfc-config-prod
-        run: |
-          terraform workspace select tfc-config-prod
-          terraform apply -auto-approve 
+        run: terraform apply -auto-approve 
       - name: Terraform Apply Dev
         if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
         env:
