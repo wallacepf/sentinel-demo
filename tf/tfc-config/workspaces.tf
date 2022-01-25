@@ -46,16 +46,16 @@ resource "tfe_workspace" "vpc_demo" {
   }
 }
 
-resource "tfe_workspace" "eip_demo" {
-  name              = "sentinel-eip-demo-${local.env}"
-  organization      = local.org
-  auto_apply        = true
-  tag_names         = ["demo", "eip", "sentinel", local.env]
-  working_directory = "tf/eip-demo"
+// resource "tfe_workspace" "eip_demo" {
+//   name              = "sentinel-eip-demo-${local.env}"
+//   organization      = local.org
+//   auto_apply        = true
+//   tag_names         = ["demo", "eip", "sentinel", local.env]
+//   working_directory = "tf/eip-demo"
 
-  vcs_repo {
-    identifier     = local.vcs_repo
-    branch         = local.branch
-    oauth_token_id = var.vcs_oauth_key
-  }
-}
+//   vcs_repo {
+//     identifier     = local.vcs_repo
+//     branch         = local.branch
+//     oauth_token_id = var.vcs_oauth_key
+//   }
+// }

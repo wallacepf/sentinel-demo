@@ -46,18 +46,18 @@ resource "tfe_variable" "aws_secret_access_vpc_demo" {
   sensitive    = true
 }
 
-resource "tfe_variable" "aws_access_key_eip_demo" {
-  key          = "AWS_ACCESS_KEY_ID"
-  value        = var.aws_access_key
-  category     = "env"
-  workspace_id = tfe_workspace.eip_demo.id
-  sensitive    = true
-}
+// resource "tfe_variable" "aws_access_key_eip_demo" {
+//   key          = "AWS_ACCESS_KEY_ID"
+//   value        = var.aws_access_key
+//   category     = "env"
+//   workspace_id = tfe_workspace.eip_demo.id
+//   sensitive    = true
+// }
 
-resource "tfe_variable" "aws_secret_access_eip_demo" {
-  key          = "AWS_SECRET_ACCESS_KEY"
-  value        = var.aws_secret_id
-  category     = "env"
-  workspace_id = tfe_workspace.eip_demo.id
-  sensitive    = true
-}
+// resource "tfe_variable" "aws_secret_access_eip_demo" {
+//   key          = "AWS_SECRET_ACCESS_KEY"
+//   value        = var.aws_secret_id
+//   category     = "env"
+//   workspace_id = tfe_workspace.eip_demo.id
+//   sensitive    = true
+// }
