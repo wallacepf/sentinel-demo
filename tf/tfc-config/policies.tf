@@ -13,8 +13,18 @@ data "tfe_workspace" "vpc_demo" {
   organization = local.org
 }
 
+<<<<<<< HEAD
 data "tfe_workspace" "eip_demo" {
   name         = "sentinel-eip-demo-${local.env}"
+=======
+data "tfe_workspace_ids" "prod_wks" {
+  tag_names    = ["prod"]
+  organization = local.org
+}
+
+data "tfe_workspace_ids" "dev_wks" {
+  tag_names    = ["dev"]
+>>>>>>> ea8c020f80994c0cb8c36cd5b933a8b3c4ee2eae
   organization = local.org
 }
 
@@ -53,7 +63,7 @@ resource "tfe_policy_set" "tag-enforcement" {
   description   = "Policy Set to deny tags"
   organization  = local.org
   policies_path = "policies/tag-enforcement"
-  global        = true
+  workspace_ids = local.env == "prod" ? values(data.tfe_workspace_ids.prod_wks.ids) : values(data.tfe_workspace_ids.dev_wks.ids)
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
