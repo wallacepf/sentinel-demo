@@ -22,19 +22,18 @@ data "tfe_workspace" "vpc_demo" {
   ]
 }
 
-data "tfe_workspace" "eip_demo" {
-  name         = "sentinel-eip-demo-${local.env}"
-  organization = local.org
-  depends_on = [
-    tfe_workspace.eip_demo
-  ]
-}
+// data "tfe_workspace" "eip_demo" {
+//   name         = "sentinel-eip-demo-${local.env}"
+//   organization = local.org
+//   depends_on = [
+//     tfe_workspace.eip_demo
+//   ]
+// }
 
 data "tfe_workspace_ids" "prod_wks" {
   tag_names    = ["prod"]
   organization = local.org
   depends_on = [
-    tfe_workspace.eip_demo,
     tfe_workspace.vpc_demo,
     tfe_workspace.s3_demo,
     tfe_workspace.iam_demo
@@ -46,7 +45,6 @@ data "tfe_workspace_ids" "dev_wks" {
   tag_names    = ["dev"]
   organization = local.org
   depends_on = [
-    tfe_workspace.eip_demo,
     tfe_workspace.vpc_demo,
     tfe_workspace.s3_demo,
     tfe_workspace.iam_demo
@@ -99,20 +97,20 @@ resource "tfe_policy_set" "tag-enforcement" {
   }
 }
 
-resource "tfe_policy_set" "deny-eip" {
-  name          = "deny-eip-${local.env}"
-  description   = "Policy Set to deny EIP creation"
-  organization  = local.org
-  policies_path = "policies/block-eip-creation"
-  workspace_ids = [data.tfe_workspace.eip_demo.id]
+// resource "tfe_policy_set" "deny-eip" {
+//   name          = "deny-eip-${local.env}"
+//   description   = "Policy Set to deny EIP creation"
+//   organization  = local.org
+//   policies_path = "policies/block-eip-creation"
+//   workspace_ids = [data.tfe_workspace.eip_demo.id]
 
-  vcs_repo {
-    identifier         = "wallacepf/sentinel-demo"
-    branch             = local.branch
-    ingress_submodules = false
-    oauth_token_id     = var.vcs_oauth_key
-  }
-}
+//   vcs_repo {
+//     identifier         = "wallacepf/sentinel-demo"
+//     branch             = local.branch
+//     ingress_submodules = false
+//     oauth_token_id     = var.vcs_oauth_key
+//   }
+// }
 
 resource "tfe_policy_set_parameter" "resources" {
   key           = "resource_types"
