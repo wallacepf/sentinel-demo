@@ -60,8 +60,18 @@ jobs:
         run: terraform init
       - name: Terraform Validate
         run: terraform validate -no-color
-      - name: Terraform Plan
-        run: terraform plan -no-color -var="vcs_oauth_key=${{ secrets.VCS_OAUTH_KEY }}" -var="token=${{ secrets.TF_API_TOKEN }}"
+      - name: Terraform Plan Prod
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: main
+          TF_WORKSPACE: tfc-config-prod       
+        run: terraform plan -no-color
+      - name: Terraform Plan Dev
+        if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: dev
+          TF_WORKSPACE: tfc-config-dev    
+        run: terraform plan -no-color
       - name: Terraform apply Prod
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
