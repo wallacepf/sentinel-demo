@@ -1,31 +1,57 @@
 data "tfe_workspace" "iam_demo" {
   name         = "sentinel-iam-demo-${local.env}"
   organization = local.org
+  depends_on = [
+    tfe_workspace.iam_demo
+  ]
 }
 
 data "tfe_workspace" "s3_demo" {
   name         = "sentinel-s3-demo-${local.env}"
   organization = local.org
+  depends_on = [
+    tfe_workspace.s3_demo
+  ]
 }
 
 data "tfe_workspace" "vpc_demo" {
   name         = "sentinel-vpc-demo-${local.env}"
   organization = local.org
+  depends_on = [
+    tfe_workspace.vpc_demo
+  ]
 }
 
 data "tfe_workspace" "eip_demo" {
   name         = "sentinel-eip-demo-${local.env}"
   organization = local.org
+  depends_on = [
+    tfe_workspace.eip_demo
+  ]
 }
 
 data "tfe_workspace_ids" "prod_wks" {
   tag_names    = ["prod"]
   organization = local.org
+  depends_on = [
+    tfe_workspace.eip_demo,
+    tfe_workspace.vpc_demo,
+    tfe_workspace.s3_demo,
+    tfe_workspace.iam_demo
+
+  ]
 }
 
 data "tfe_workspace_ids" "dev_wks" {
   tag_names    = ["dev"]
   organization = local.org
+  depends_on = [
+    tfe_workspace.eip_demo,
+    tfe_workspace.vpc_demo,
+    tfe_workspace.s3_demo,
+    tfe_workspace.iam_demo
+
+  ]
 }
 
 resource "tfe_policy_set" "deny-iam-user-creation" {
