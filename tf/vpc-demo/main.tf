@@ -52,7 +52,7 @@ resource "aws_subnet" "external" {
 resource "aws_instance" "demo_server" {
   ami               = "ami-02e136e904f3da870"
   instance_type     = "t2.micro"
-  availability_zone = data.aws_availability_zones.available.names[0]
+  availability_zone = data.aws_availability_zones.available.names[1]
   subnet_id         = aws_subnet.external.id
   security_groups   = [module.security_group.security_group_id]
 
