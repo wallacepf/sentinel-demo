@@ -16,10 +16,10 @@ resource "random_pet" "random" {
 //   create_iam_access_key         = true
 // }
 
-// resource "aws_iam_user" "dummer" {
-//    name          = "dummer-${random_pet.random.id}"
-//    force_destroy = true
-// }
+resource "aws_iam_user" "dummer" {
+   name          = "dummer-${random_pet.random.id}"
+   force_destroy = true
+}
 
 resource "null_resource" "teste" {
 
