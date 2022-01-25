@@ -309,7 +309,7 @@ resource_changes = {
 		"module_address": "",
 		"name":           "default",
 		"provider_name":  "registry.terraform.io/hashicorp/aws",
-		"type":           "aws_eip",
+		"type":           "aws_eip_demo",
 	},
 	"aws_instance.demo_server": {
 		"address": "aws_instance.demo_server",
