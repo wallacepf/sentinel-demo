@@ -13,10 +13,10 @@ data "tfe_workspace" "vpc_demo" {
   organization = local.org
 }
 
-<<<<<<< HEAD
 data "tfe_workspace" "eip_demo" {
   name         = "sentinel-eip-demo-${local.env}"
-=======
+  organization = local.org
+
 data "tfe_workspace_ids" "prod_wks" {
   tag_names    = ["prod"]
   organization = local.org
@@ -24,7 +24,6 @@ data "tfe_workspace_ids" "prod_wks" {
 
 data "tfe_workspace_ids" "dev_wks" {
   tag_names    = ["dev"]
->>>>>>> ea8c020f80994c0cb8c36cd5b933a8b3c4ee2eae
   organization = local.org
 }
 
@@ -78,7 +77,7 @@ resource "tfe_policy_set" "deny-eip" {
   description   = "Policy Set to deny EIP creation"
   organization  = local.org
   policies_path = "policies/deny-eip"
-  global        = true
+  workspace_ids = [data.tfe_workspace.eip_demo.id]
 
   vcs_repo {
     identifier         = "wallacepf/sentinel-demo"
