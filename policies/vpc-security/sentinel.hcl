@@ -26,5 +26,5 @@ policy "instance-subnet-allowed" {
 
 policy "instance-ig-sg-allowed" {
   source = "./vpc-ig-sg.sentinel"
-  enforcement_level = "soft-mandatory"
+  enforcement_level = "advisory"
 }
