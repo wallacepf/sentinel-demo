@@ -103,7 +103,7 @@ resource "tfe_policy_set" "deny-eip" {
   name          = "deny-eip-${local.env}"
   description   = "Policy Set to deny EIP creation"
   organization  = local.org
-  policies_path = "policies/deny-eip"
+  policies_path = "policies/block-eip-creation"
   workspace_ids = [data.tfe_workspace.eip_demo.id]
 
   vcs_repo {
