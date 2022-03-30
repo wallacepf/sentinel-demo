@@ -23,12 +23,13 @@ resource "tfe_variable" "vault_token_s3_demo" {
 }
 
 resource "tfe_variable" "vault_addr" {
-  key          = "VAULT_ADDR"
-  value        = var.vault_addr
-  category     = "env"
-  variable_set = tfe_variable_set.vault_addr.id
-  sensitive    = true
+  key             = "VAULT_ADDR"
+  value           = var.vault_addr
+  category        = "env"
+  sensitive       = true
+  variable_set_id = tfe_variable_set.vault_addr.id
 }
+
 
 resource "tfe_variable_set" "vault_addr" {
   name         = "Vault Address"
