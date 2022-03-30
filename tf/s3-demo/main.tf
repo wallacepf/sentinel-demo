@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      version = "~>4.8.0"
+    }
+  }
+}
+
 provider "aws" {
   region     = "us-east-1"
   access_key = data.vault_aws_access_credentials.creds.access_key
@@ -15,7 +23,7 @@ resource "aws_kms_key" "objects" {
 
 module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 3.0.0"
+  version = "~> 2.15.0"
 
   bucket        = "my-demo-s3-${random_pet.random.id}"
   acl           = "private"
