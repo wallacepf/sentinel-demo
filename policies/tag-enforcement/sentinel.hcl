@@ -27,5 +27,5 @@ module "aws-functions" {
 
 policy "tag-enforcement" {
   source = "./tag-enforcement.sentinel"
-  enforcement_level = "soft-mandatory"
+  enforcement_level = "advisory"
 }
