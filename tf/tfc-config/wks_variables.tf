@@ -34,7 +34,7 @@ resource "tfe_variable_set" "vault_addr" {
   name         = "Vault Address"
   global       = true
   organization = "my-demo-account"
-  description = "Vault Address"
+  description  = "Vault Address"
 }
 
 resource "tfe_variable" "aws_access_key_vpc_demo" {
