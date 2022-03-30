@@ -1,13 +1,8 @@
-
-
 provider "aws" {
   region = "us-east-1"
   access_key = data.vault_aws_access_credentials.creds.access_key
   secret_key = data.vault_aws_access_credentials.creds.secret_key
 }
-
-
-
 
 resource "random_pet" "random" {
 
@@ -26,7 +21,7 @@ module "s3_bucket" {
   force_destroy = true
 
   versioning = {
-    enabled = false
+    enabled = true
   }
 
   tags = {
