@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region     = "us-east-1"
   access_key = data.vault_aws_access_credentials.creds.access_key
   secret_key = data.vault_aws_access_credentials.creds.secret_key
 }
@@ -25,8 +25,8 @@ module "s3_bucket" {
   }
 
   tags = {
-     Owner   = "Dev"
-     Puurpose = "Demo"
+    Owner   = "Dev"
+    Purpose = "Demo"
   }
 
   server_side_encryption_configuration = {
