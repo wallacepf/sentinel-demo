@@ -34,6 +34,7 @@ jobs:
       TF_VAR_vcs_oauth_key: ${{ secrets.VCS_OAUTH_KEY }}
       TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
       TF_VAR_aws_secret_id: ${{ secrets.AWS_SECRET_ID }}
+      TF_VAR_vault_addr: ${{ secrets.VAULT_ADDR }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
