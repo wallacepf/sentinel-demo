@@ -1,5 +1,9 @@
 name: sentinel-pipe
-on: push
+on: 
+  push:
+    paths:
+      - 'policies/**'
+      - 'tf/tfc-config/*'
 jobs:
   test-sentinel-policy:
     runs-on: ubuntu-latest
@@ -72,24 +76,15 @@ jobs:
           TF_VAR_branch: dev
           TF_WORKSPACE: tfc-config-dev    
         run: terraform plan -no-color
-      # - name: Terraform apply Prod
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #   env:
-      #     TF_VAR_branch: main
-      #     TF_WORKSPACE: tfc-config-prod
-      #   run: terraform apply -auto-approve 
-      # - name: Terraform Apply Dev
-      #   if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
-      #   env:
-      #     TF_VAR_branch: dev
-      #     TF_WORKSPACE: tfc-config-dev
-      #   run: terraform apply -auto-approve 
-
-
-
-
-
-
-
-
-
+      - name: Terraform apply Prod
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: main
+          TF_WORKSPACE: tfc-config-prod
+        run: terraform apply -auto-approve 
+      - name: Terraform Apply Dev
+        if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+        env:
+          TF_VAR_branch: dev
+          TF_WORKSPACE: tfc-config-dev
+        run: terraform apply -auto-approve 
