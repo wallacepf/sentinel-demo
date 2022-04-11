@@ -10,5 +10,5 @@ module "tfplan-functions" {
 
 policy "s3-best-practices" {
   source = "./s3-best-practices.sentinel"
-  enforcement_level = "hard-mandatory"
+  enforcement_level = "soft-mandatory"
 }
