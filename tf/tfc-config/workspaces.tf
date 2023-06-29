@@ -1,12 +1,6 @@
-locals {
-  org      = "my-demo-account"
-  vcs_repo = "wallacepf/sentinel-demo"
-  branch   = var.branch
-}
-
-resource "tfe_project" "demo-290320237" {
+resource "tfe_project" "demo-29062023" {
   organization = local.org
-  name = "demo-290320237"
+  name = "demo-29062023"
 }
 
 resource "tfe_workspace" "iam_demo" {
@@ -15,7 +9,7 @@ resource "tfe_workspace" "iam_demo" {
   tag_names         = ["demo", "iam", "sentinel", local.env]
   auto_apply        = true
   working_directory = "tf/iam-demo"
-  project_id = tfe_project.demo-290320237.id
+  project_id = tfe_project.demo-29062023.id
 
   vcs_repo {
     identifier     = local.vcs_repo
@@ -30,7 +24,7 @@ resource "tfe_workspace" "s3_demo" {
   auto_apply        = true
   tag_names         = ["demo", "s3", "sentinel", local.env]
   working_directory = "tf/s3-demo"
-  project_id = tfe_project.demo-290320237.id
+  project_id = tfe_project.demo-29062023.id
 
   vcs_repo {
     identifier     = local.vcs_repo
@@ -45,7 +39,7 @@ resource "tfe_workspace" "vpc_demo" {
   auto_apply        = true
   tag_names         = ["demo", "vpc", "sentinel", local.env]
   working_directory = "tf/vpc-demo"
-  project_id = tfe_project.demo-290320237.id
+  project_id = tfe_project.demo-29062023.id
 
   vcs_repo {
     identifier     = local.vcs_repo
