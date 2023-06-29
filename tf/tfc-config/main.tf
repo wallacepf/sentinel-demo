@@ -8,11 +8,8 @@ terraform {
 
 }
 
-provider "tfe" {
-  token = var.token
-}
+provider "tfe" {}
 
 locals {
   env = var.branch == "main" ? "prod" : "dev"
 }
-

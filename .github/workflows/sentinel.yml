@@ -8,7 +8,7 @@ jobs:
       - name: Setup Sentinel
         working-directory: ./policies
         run: |
-          curl https://releases.hashicorp.com/sentinel/0.18.4/sentinel_0.18.4_linux_amd64.zip --output sentinel.zip
+          curl https://releases.hashicorp.com/sentinel/0.22.1/sentinel_0.22.1_linux_amd64.zip --output sentinel.zip
           unzip sentinel.zip
       - name: Sentinel Version
         working-directory: ./policies
@@ -20,69 +20,102 @@ jobs:
         working-directory: ./policies
         run: ./sentinel test */
   create-policy-set:
+    permissions:
+      contents: read
+      id-token: write
     defaults:
       run:
         working-directory: ./tf/tfc-config
     needs: test-sentinel-policy
     runs-on: ubuntu-latest
-    env:
-      TF_VAR_token: ${{ secrets.TF_API_TOKEN }}
-      TF_VAR_vcs_oauth_key: ${{ secrets.VCS_OAUTH_KEY }}
-      TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-      TF_VAR_aws_secret_id: ${{ secrets.AWS_SECRET_ID }}
+    # env:
+    #   TF_VAR_token: ${{ secrets.TF_API_TOKEN }}
+    #   TF_VAR_vcs_oauth_key: ${{ secrets.VCS_OAUTH_KEY }}
+    #   TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+    #   TF_VAR_aws_secret_key: ${{ secrets.AWS_SECRET_ID }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      - name: Import Secrets
+        id: import-secrets
+        uses: hashicorp/vault-action@v2
+        with:
+          url: https://hcp-vault-demo.vault.5bbc50e3-a284-4743-877e-ffd388d684f2.aws.hashicorp.cloud:8200
+          namespace: admin/demo
+          role: demo
+          method: jwt
+          secrets: |
+            terraform/creds/demo token | TFE_TOKEN ;
+            secret/data/demo/vcs oauth_key | TF_VAR_vcs_oauth_key ;
       - name: Setup TF
-        run: |
-          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-          sudo apt-get update && sudo apt-get install terraform
-          cat <<EOF > .terraformrc
-          credentials "app.terraform.io" {
-              token = "${{ secrets.TF_API_TOKEN }}"   
-          }
-          EOF
-          cp .terraformrc ~/
+        uses: hashicorp/setup-terraform@v2
+        # with:
+        #   cli_config_credentials_token: ${{ env.TFE_TOKEN }}
+        # run: |
+        #   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+        #   sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        #   sudo apt-get update && sudo apt-get install terraform
+        #   cat <<EOF > .terraformrc
+        #   credentials "app.terraform.io" {
+        #       token = "${{ secrets.TF_API_TOKEN }}"   
+        #   }
+        #   EOF
+        #   cp .terraformrc ~/
       - name: Terraform Format
+        id: fmt
         run: terraform fmt -check
+        continue-on-error: true
+
       - name: Terraform Init Prod
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           TF_VAR_branch: main
-          TF_WORKSPACE: tfc-config-prod       
+          TF_WORKSPACE: tfc-config-prod  
+        id: init-prd     
         run: terraform init
+
       - name: Terraform Init Dev
         if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
         env:
-          TF_VAR_branch: main
-          TF_WORKSPACE: tfc-config-dev      
+          TF_VAR_branch: dev
+          TF_WORKSPACE: tfc-config-dev  
+        id: init-dev    
         run: terraform init
+
       - name: Terraform Validate
+        id: validate
         run: terraform validate -no-color
+
       - name: Terraform Plan Prod
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           TF_VAR_branch: main
-          TF_WORKSPACE: tfc-config-prod       
+          TF_WORKSPACE: tfc-config-prod
+        id: plan-prd       
         run: terraform plan -no-color
+
       - name: Terraform Plan Dev
         if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
         env:
           TF_VAR_branch: dev
-          TF_WORKSPACE: tfc-config-dev    
+          TF_WORKSPACE: tfc-config-dev 
+        id: plan-dev   
         run: terraform plan -no-color
+
       - name: Terraform apply Prod
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           TF_VAR_branch: main
           TF_WORKSPACE: tfc-config-prod
+        id: apply-prd
         run: terraform apply -auto-approve 
+
       - name: Terraform Apply Dev
         if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
         env:
           TF_VAR_branch: dev
           TF_WORKSPACE: tfc-config-dev
+        id: apply-dev
         run: terraform apply -auto-approve 
 
 

@@ -6,3 +6,4 @@ tf/*/*.tfstate
 *.auto.tfvars
 .terraformrc
 .terraform.rc
+*.tfstate
