@@ -49,8 +49,8 @@ jobs:
             secret/data/demo/vcs oauth_key | TF_VAR_vcs_oauth_key ;
       - name: Setup TF
         uses: hashicorp/setup-terraform@v2
-        # with:
-        #   cli_config_credentials_token: ${{ env.TFE_TOKEN }}
+        with:
+          cli_config_credentials_token: ${{ env.TFE_TOKEN }}
         # run: |
         #   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
         #   sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
