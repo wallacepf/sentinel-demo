@@ -58,11 +58,20 @@ resource "tfe_variable" "jit-vault-aws-enable" {
 
 resource "tfe_variable" "jit-vault-aws-type" {
   key = "TFC_VAULT_BACKED_AWS_AUTH_TYPE"
-  value = "iam_user"
+  value = "assumed_role"
   category = "env"
   description = "JIT"
   variable_set_id = tfe_variable_set.vset-jit.id
 }
+
+resource "tfe_variable" "jit-vault-aws-role-arn" {
+  key = "TFC_VAULT_BACKED_AWS_RUN_ROLE_ARN"
+  value = "arn:aws:iam::940345621114:role/hcp-vault-role-tf-demo"
+  category = "env"
+  description = "JIT"
+  variable_set_id = tfe_variable_set.vset-jit.id
+}
+
 resource "tfe_variable" "jit-vault-aws-role" {
   key = "TFC_VAULT_BACKED_AWS_RUN_VAULT_ROLE"
   value = "demo"
