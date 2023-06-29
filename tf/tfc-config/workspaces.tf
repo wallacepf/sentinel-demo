@@ -4,6 +4,11 @@ locals {
   branch   = var.branch
 }
 
+resource "tfe_project" "demo-290320237" {
+  organization = local.org
+  name = "demo-290320237"
+}
+
 resource "tfe_workspace" "iam_demo" {
   name              = "sentinel-iam-demo-${local.env}"
   organization      = local.org
