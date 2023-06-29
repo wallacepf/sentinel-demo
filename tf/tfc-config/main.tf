@@ -1,9 +1,7 @@
 terraform {
   cloud {
     organization = "my-demo-account"
-    workspaces {
-      name = "tfc-config"
-    }
+    
   }
 
 }
