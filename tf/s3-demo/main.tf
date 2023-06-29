@@ -6,7 +6,6 @@ resource "random_pet" "random" {
 
 }
 
-
 resource "aws_kms_key" "objects" {
   description             = "KMS key is used to encrypt bucket objects"
   deletion_window_in_days = 7
@@ -14,9 +13,13 @@ resource "aws_kms_key" "objects" {
 
 module "s3_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
+  version = "~> 3.14.0"
 
-  bucket        = "my-demo-s3-${random_pet.random.id}"
-  acl           = "private"
+  bucket = "my-demo-s3-${random_pet.random.id}"
+  acl    = "private"
+
+  control_object_ownership = true
+  object_ownership         = "ObjectWriter"
   force_destroy = true
 
   versioning = {
@@ -37,5 +40,8 @@ module "s3_bucket" {
     }
   }
 }
+
+
+
 
 
