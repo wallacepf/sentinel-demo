@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "my-demo-account"
     workspaces {
-      tags = ["tfc-config"]
+      name = "tfc-config"
     }
   }
 
