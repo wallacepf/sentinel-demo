@@ -28,11 +28,6 @@ jobs:
         working-directory: ./tf/tfc-config
     needs: test-sentinel-policy
     runs-on: ubuntu-latest
-    # env:
-    #   TF_VAR_token: ${{ secrets.TF_API_TOKEN }}
-    #   TF_VAR_vcs_oauth_key: ${{ secrets.VCS_OAUTH_KEY }}
-    #   TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-    #   TF_VAR_aws_secret_key: ${{ secrets.AWS_SECRET_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -51,16 +46,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ env.TF_VAR_token }}
-        # run: |
-        #   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-        #   sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-        #   sudo apt-get update && sudo apt-get install terraform
-        #   cat <<EOF > .terraformrc
-        #   credentials "app.terraform.io" {
-        #       token = "${{ secrets.TF_API_TOKEN }}"   
-        #   }
-        #   EOF
-        #   cp .terraformrc ~/
+
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
@@ -70,16 +56,16 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           TF_VAR_branch: main
-          TF_WORKSPACE: tfc-config-prod  
-        id: init-prd     
+          TF_WORKSPACE: tfc-config-prod
+        id: init-prd
         run: terraform init
 
       - name: Terraform Init Dev
         if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
         env:
           TF_VAR_branch: dev
-          TF_WORKSPACE: tfc-config-dev  
-        id: init-dev    
+          TF_WORKSPACE: tfc-config-dev
+        id: init-dev
         run: terraform init
 
       - name: Terraform Validate
@@ -91,15 +77,15 @@ jobs:
         env:
           TF_VAR_branch: main
           TF_WORKSPACE: tfc-config-prod
-        id: plan-prd       
+        id: plan-prd
         run: terraform plan -no-color
 
       - name: Terraform Plan Dev
         if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
         env:
           TF_VAR_branch: dev
-          TF_WORKSPACE: tfc-config-dev 
-        id: plan-dev   
+          TF_WORKSPACE: tfc-config-dev
+        id: plan-dev
         run: terraform plan -no-color
 
       - name: Terraform apply Prod
@@ -108,7 +94,7 @@ jobs:
           TF_VAR_branch: main
           TF_WORKSPACE: tfc-config-prod
         id: apply-prd
-        run: terraform apply -auto-approve 
+        run: terraform apply -auto-approve
 
       - name: Terraform Apply Dev
         if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
@@ -116,13 +102,4 @@ jobs:
           TF_VAR_branch: dev
           TF_WORKSPACE: tfc-config-dev
         id: apply-dev
-        run: terraform apply -auto-approve 
-
-
-
-
-
-
-
-
-
+        run: terraform apply -auto-approve
