@@ -1,6 +1,6 @@
 resource "tfe_project" "demo-29062023" {
   organization = local.org
-  name         = "demo-29062023"
+  name         = "sentinel-policies-demo"
 }
 
 resource "tfe_workspace" "iam_demo" {

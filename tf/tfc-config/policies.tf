@@ -97,21 +97,6 @@ resource "tfe_policy_set" "tag-enforcement" {
   }
 }
 
-// resource "tfe_policy_set" "deny-eip" {
-//   name          = "deny-eip-${local.env}"
-//   description   = "Policy Set to deny EIP creation"
-//   organization  = local.org
-//   policies_path = "policies/block-eip-creation"
-//   workspace_ids = [data.tfe_workspace.eip_demo.id]
-
-//   vcs_repo {
-//     identifier         = "wallacepf/sentinel-demo"
-//     branch             = local.branch
-//     ingress_submodules = false
-//     oauth_token_id     = var.vcs_oauth_key
-//   }
-// }
-
 resource "tfe_policy_set_parameter" "resources" {
   key           = "resource_types"
   value         = "[\"aws_instance\", \"aws_s3_bucket\"]"
