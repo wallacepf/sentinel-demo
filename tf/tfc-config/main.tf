@@ -2,7 +2,8 @@ terraform {
   cloud {
     organization = "my-demo-account"
     workspaces {
-      tags = [ "tfc-config-prod" ]
+      name = "tfc-config-prod"
+      project = "sentinel-policies-demo"
     }
   }
   required_providers {
