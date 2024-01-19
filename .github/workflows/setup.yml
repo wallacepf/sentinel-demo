@@ -1,5 +1,9 @@
 name: Setup Env
-on: push
+on: 
+  push:
+    paths:
+      - 'policies/**'
+      - 'tf/**'
 jobs:
   test-sentinel-policy:
     runs-on: ubuntu-latest
