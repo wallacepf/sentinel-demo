@@ -28,5 +28,12 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           cli_config_credentials_token: ${{ env.TF_VAR_token }}
+
+      - name: Terraform Init Prod
+        env:
+           TF_VAR_branch: ${{ github.ref.name }}
+           TF_WORKSPACE: tfc-config-prod
+        run: terraform init
+        
       - name: Destroy
         run: terraform destroy -auto-approve
