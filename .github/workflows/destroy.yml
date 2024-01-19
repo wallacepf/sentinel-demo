@@ -1,0 +1,32 @@
+name: "Destroy Env"
+on: workflow_dispatch
+jobs:
+  destroy_env:
+    permissions:
+      id-token: write
+    defaults:
+      run:
+        working-directory: ./tf/tfc-config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Import Secrets
+        id: import-secrets
+        uses: hashicorp/vault-action@v2
+        with:
+          url: https://hcp-vault-demo.vault.5bbc50e3-a284-4743-877e-ffd388d684f2.aws.hashicorp.cloud:8200
+          namespace: admin/demo
+          role: demo
+          method: jwt
+          secrets: |
+            terraform/creds/demo token | TF_VAR_token ;
+            secret/data/demo/vcs oauth_key | TF_VAR_vcs_oauth_key ;
+
+      - name: Setup TF
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ env.TF_VAR_token }}
+      - name: Destroy
+        run: terraform destroy -auto-approve
