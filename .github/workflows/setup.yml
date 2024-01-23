@@ -58,19 +58,10 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Init Prod
-        if: github.ref.name == 'main'
         env:
           TF_VAR_branch: main
           TF_WORKSPACE: tfc-config-prod
         id: init-prd
-        run: terraform init
-
-      - name: Terraform Init Dev
-        if: github.ref.name == 'dev'
-        env:
-          TF_VAR_branch: dev
-          TF_WORKSPACE: tfc-config-dev
-        id: init-dev
         run: terraform init
 
       - name: Terraform Validate
@@ -78,33 +69,15 @@ jobs:
         run: terraform validate -no-color
 
       - name: Terraform Plan Prod
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           TF_VAR_branch: main
           TF_WORKSPACE: tfc-config-prod
         id: plan-prd
         run: terraform plan -no-color
 
-      - name: Terraform Plan Dev
-        if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
-        env:
-          TF_VAR_branch: dev
-          TF_WORKSPACE: tfc-config-dev
-        id: plan-dev
-        run: terraform plan -no-color
-
       - name: Terraform apply Prod
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           TF_VAR_branch: main
           TF_WORKSPACE: tfc-config-prod
         id: apply-prd
-        run: terraform apply -auto-approve
-
-      - name: Terraform Apply Dev
-        if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
-        env:
-          TF_VAR_branch: dev
-          TF_WORKSPACE: tfc-config-dev
-        id: apply-dev
         run: terraform apply -auto-approve
