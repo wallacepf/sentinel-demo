@@ -48,7 +48,7 @@ jobs:
             terraform/creds/demo token | TF_VAR_token ;
             secret/data/demo/vcs oauth_key | TF_VAR_vcs_oauth_key ;
       - name: Setup TF
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ env.TF_VAR_token }}
 
