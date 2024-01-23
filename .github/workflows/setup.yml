@@ -58,7 +58,7 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Init Prod
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref.name == 'main' && github.event_name == 'push'
         env:
           TF_VAR_branch: main
           TF_WORKSPACE: tfc-config-prod
@@ -66,7 +66,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Init Dev
-        if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+        if: github.ref.name == 'dev' && github.event_name == 'push'
         env:
           TF_VAR_branch: dev
           TF_WORKSPACE: tfc-config-dev
