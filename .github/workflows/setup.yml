@@ -1,5 +1,6 @@
 name: Setup Env
-on: 
+on:
+  workflow_dispatch: 
   push:
     paths:
       - 'policies/**'
