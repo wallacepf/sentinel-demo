@@ -1,5 +1,5 @@
 data "tfe_project" "sentinel-demo" {
-  name = "sentinel-policies-demo"
+  name         = "sentinel-policies-demo"
   organization = local.org
 }
 
