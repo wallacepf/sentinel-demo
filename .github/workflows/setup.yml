@@ -13,7 +13,7 @@ jobs:
       - name: Setup Sentinel
         working-directory: ./policies
         run: |
-          curl https://releases.hashicorp.com/sentinel/0.24.1/sentinel_0.24.1_linux_amd64.zip --output sentinel.zip
+          curl https://releases.hashicorp.com/sentinel/0.26.0/sentinel_0.26.0_linux_amd64.zip --output sentinel.zip
           unzip sentinel.zip
       - name: Sentinel Version
         working-directory: ./policies
