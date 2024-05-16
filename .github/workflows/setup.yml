@@ -60,7 +60,7 @@ jobs:
       - name: Terraform Init Prod
         env:
           TF_VAR_branch: main
-          TF_WORKSPACE: tfc-config-prod
+          # TF_WORKSPACE: tfc-config-prod
         id: init-prd
         run: terraform init
 
