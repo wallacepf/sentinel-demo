@@ -3,7 +3,7 @@ terraform {
     organization = "my-demo-account"
     workspaces {
       name    = "tfc-config-prod"
-      project = "sentinel-policies-demo"
+      project = "demo"
     }
   }
   required_providers {
