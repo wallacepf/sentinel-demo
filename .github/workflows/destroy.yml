@@ -32,11 +32,11 @@ jobs:
       - name: Terraform Init Prod
         env:
           TF_VAR_branch: ${{ github.ref.name }}
-          TF_WORKSPACE: tfc-config-prod
+          # TF_WORKSPACE: tfc-config-prod
         run: terraform init
 
       - name: Destroy
         env:
           TF_VAR_branch: ${{ github.ref.name }}
-          TF_WORKSPACE: tfc-config-prod
+          # TF_WORKSPACE: tfc-config-prod
         run: terraform destroy -auto-approve
