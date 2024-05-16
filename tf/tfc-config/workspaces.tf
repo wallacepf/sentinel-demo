@@ -1,5 +1,5 @@
-data "tfe_project" "sentinel-demo" {
-  name         = "sentinel-policies-demo"
+data "tfe_project" "demo" {
+  name         = "demo"
   organization = local.org
 }
 
@@ -11,7 +11,7 @@ resource "tfe_workspace" "iam_demo" {
   auto_apply        = true
   queue_all_runs    = false
   working_directory = "tf/iam-demo"
-  project_id        = data.tfe_project.sentinel-demo.id
+  project_id        = data.tfe_project.demo.id
 
   vcs_repo {
     identifier     = local.vcs_repo
@@ -29,7 +29,7 @@ resource "tfe_workspace" "s3_demo" {
   queue_all_runs    = false
   tag_names         = ["demo", "s3", "sentinel", local.env]
   working_directory = "tf/s3-demo"
-  project_id        = data.tfe_project.sentinel-demo.id
+  project_id        = data.tfe_project.demo.id
 
   vcs_repo {
     identifier     = local.vcs_repo
@@ -47,7 +47,7 @@ resource "tfe_workspace" "vpc_demo" {
   queue_all_runs    = false
   tag_names         = ["demo", "vpc", "sentinel", local.env]
   working_directory = "tf/vpc-demo"
-  project_id        = data.tfe_project.sentinel-demo.id
+  project_id        = data.tfe_project.demo.id
 
   vcs_repo {
     identifier     = local.vcs_repo

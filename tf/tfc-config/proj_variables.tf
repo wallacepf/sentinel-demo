@@ -5,7 +5,7 @@ resource "tfe_variable_set" "vset-jit" {
 
 resource "tfe_project_variable_set" "proj-vset" {
   variable_set_id = tfe_variable_set.vset-jit.id
-  project_id      = data.tfe_project.sentinel-demo.id
+  project_id      = data.tfe_project.demo.id
 }
 
 resource "tfe_variable" "jit-vault-enable" {
