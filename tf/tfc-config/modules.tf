@@ -5,3 +5,8 @@ resource "tfe_registry_module" "rds-module" {
     oauth_token_id     = var.vcs_oauth_key
   }
 }
+
+resource "tfe_no_code_module" "foobar" {
+    organization = local.org
+    registry_module = tfe_registry_module.rds-module.id
+}
