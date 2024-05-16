@@ -71,13 +71,13 @@ jobs:
       - name: Terraform Plan Prod
         env:
           TF_VAR_branch: main
-          TF_WORKSPACE: tfc-config-prod
+          # TF_WORKSPACE: tfc-config-prod
         id: plan-prd
         run: terraform plan -no-color
 
       - name: Terraform apply Prod
         env:
           TF_VAR_branch: main
-          TF_WORKSPACE: tfc-config-prod
+          # TF_WORKSPACE: tfc-config-prod
         id: apply-prd
         run: terraform apply -auto-approve
