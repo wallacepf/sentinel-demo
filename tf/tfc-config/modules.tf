@@ -2,7 +2,7 @@ resource "tfe_registry_module" "rds-module" {
   vcs_repo {
     display_identifier = "wallacepf/terraform-aws-rds"
     identifier         = "wallacepf/terraform-aws-rds"
-    oauth_token_id     = var.vcs_oauth_key
+    oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
   }
 }
 

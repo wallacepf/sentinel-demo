@@ -55,7 +55,7 @@ resource "tfe_policy_set" "deny-iam-user-creation" {
     identifier         = "wallacepf/sentinel-demo"
     branch             = local.branch
     ingress_submodules = false
-    oauth_token_id     = var.vcs_oauth_key
+    oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
   }
 }
 
@@ -70,7 +70,7 @@ resource "tfe_policy_set" "s3-compliance" {
     identifier         = "wallacepf/sentinel-demo"
     branch             = local.branch
     ingress_submodules = false
-    oauth_token_id     = var.vcs_oauth_key
+    oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
   }
 }
 
@@ -85,7 +85,7 @@ resource "tfe_policy_set" "tag-enforcement" {
     identifier         = "wallacepf/sentinel-demo"
     branch             = local.branch
     ingress_submodules = false
-    oauth_token_id     = var.vcs_oauth_key
+    oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
   }
 }
 
@@ -112,7 +112,7 @@ resource "tfe_policy_set" "vpc_security" {
     identifier         = "wallacepf/sentinel-demo"
     branch             = local.branch
     ingress_submodules = false
-    oauth_token_id     = var.vcs_oauth_key
+    oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
   }
 }
 

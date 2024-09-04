@@ -3,6 +3,10 @@ data "tfe_project" "demo" {
   organization = local.org
 }
 
+data "tfe_oauth_client" "client" {
+  organization     = "my-demo-account"
+  service_provider = "github"
+}
 
 resource "tfe_workspace" "iam_demo" {
   name              = "sentinel-iam-demo-${local.env}"
@@ -16,7 +20,7 @@ resource "tfe_workspace" "iam_demo" {
   vcs_repo {
     identifier     = local.vcs_repo
     branch         = local.branch
-    oauth_token_id = var.vcs_oauth_key
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
 
   depends_on = [tfe_variable_set.vset-jit]
@@ -34,7 +38,7 @@ resource "tfe_workspace" "s3_demo" {
   vcs_repo {
     identifier     = local.vcs_repo
     branch         = local.branch
-    oauth_token_id = var.vcs_oauth_key
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
 
   depends_on = [tfe_variable_set.vset-jit]
@@ -52,7 +56,7 @@ resource "tfe_workspace" "vpc_demo" {
   vcs_repo {
     identifier     = local.vcs_repo
     branch         = local.branch
-    oauth_token_id = var.vcs_oauth_key
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
 
   depends_on = [tfe_variable_set.vset-jit]
