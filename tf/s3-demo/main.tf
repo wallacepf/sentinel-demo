@@ -15,7 +15,7 @@ module "s3_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 3.14.0"
 
-  bucket = "my-demo-s3-${random_pet.random.id}"
+  bucket = "my-demo-s3-teste-${random_pet.random.id}"
   acl    = "private"
 
   control_object_ownership = true
