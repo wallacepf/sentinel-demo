@@ -123,7 +123,7 @@ resource "tfe_policy_set_parameter" "allowed_subnet" {
 }
 
 resource "tfe_policy_set" "check_ingress" {
-  name          = "vpc-security-${local.env}"
+  name          = "check-ingress-${local.env}"
   description   = "Policy Set to enforce VPC Security"
   organization  = local.org
   policies_path = "policies/check_ingress_rule"
@@ -137,7 +137,7 @@ resource "tfe_policy_set" "check_ingress" {
   }
 }
 
-resource "tfe_project_policy_set" "ingress_security" {
+resource "tfe_project_policy_set" "check_ingress" {
   policy_set_id = tfe_policy_set.check_ingress.id
   project_id    = data.tfe_project.demo.id
 }
