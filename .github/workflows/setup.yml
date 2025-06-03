@@ -42,7 +42,7 @@ jobs:
         with:
           url: https://hcp-vault-demo.vault.5bbc50e3-a284-4743-877e-ffd388d684f2.aws.hashicorp.cloud:8200
           namespace: admin/demo
-          role: demo
+          role: github-actions-role
           method: jwt
           jwtGithubAudience: https://github.com/wallacepf
           secrets: |
