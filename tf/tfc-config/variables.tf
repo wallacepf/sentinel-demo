@@ -3,6 +3,6 @@
 # variable "aws_secret_key" { sensitive = true }
 variable "token" { sensitive = true }
 variable "branch" {
-    default = "main"
-    type = string
+  default = "main"
+  type    = string
 }

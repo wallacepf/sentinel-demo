@@ -121,3 +121,23 @@ resource "tfe_policy_set_parameter" "allowed_subnet" {
   value         = "aws_subnet.internal.id"
   policy_set_id = tfe_policy_set.vpc_security.id
 }
+
+resource "tfe_policy_set" "check_ingress" {
+  name          = "vpc-security-${local.env}"
+  description   = "Policy Set to enforce VPC Security"
+  organization  = local.org
+  policies_path = "policies/check_ingress_rule"
+  kind          = "opa"
+
+  vcs_repo {
+    identifier         = "wallacepf/sentinel-demo"
+    branch             = local.branch
+    ingress_submodules = false
+    oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
+  }
+}
+
+resource "tfe_project_policy_set" "ingress_security" {
+  policy_set_id = tfe_policy_set.check_ingress.id
+  project_id    = data.tfe_project.demo.id
+}

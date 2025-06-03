@@ -7,6 +7,6 @@ resource "tfe_registry_module" "rds-module" {
 }
 
 resource "tfe_no_code_module" "foobar" {
-    organization = local.org
-    registry_module = tfe_registry_module.rds-module.id
+  organization    = local.org
+  registry_module = tfe_registry_module.rds-module.id
 }
