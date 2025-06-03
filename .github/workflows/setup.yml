@@ -44,6 +44,7 @@ jobs:
           namespace: admin/demo
           role: demo
           method: jwt
+          jwtGithubAudience: https://github.com/wallacepf
           secrets: |
             terraform/creds/demo token | TF_VAR_token ;
             secret/data/demo/vcs oauth_key | TF_VAR_vcs_oauth_key ;
