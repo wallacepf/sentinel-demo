@@ -27,13 +27,15 @@ resource "tfe_workspace" "iam_demo" {
 }
 
 resource "tfe_workspace" "s3_demo" {
-  name              = "sentinel-s3-demo-${local.env}"
-  organization      = local.org
-  auto_apply        = false
-  queue_all_runs    = false
-  tag_names         = ["demo", "s3", "sentinel", local.env]
-  working_directory = "tf/s3-demo"
-  project_id        = data.tfe_project.demo.id
+  name                           = "sentinel-s3-demo-${local.env}"
+  organization                   = local.org
+  auto_apply                     = true
+  queue_all_runs                 = true
+  tag_names                      = ["demo", "s3", "sentinel", local.env]
+  working_directory              = "tf/s3-demo"
+  project_id                     = data.tfe_project.demo.id
+  auto_destroy_activity_duration = "1h"
+
 
   vcs_repo {
     identifier     = local.vcs_repo
