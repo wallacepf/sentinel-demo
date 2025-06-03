@@ -10,6 +10,15 @@ nonVersionatedS3Buckets = plan.filter_attribute_is_not_value(allBucketVersioning
 
 validated = length(nonPrivateS3Buckets["messages"]) is 0 and
 	length(nonVersionatedS3Buckets["messages"]) is 0
+
+if validated is false {
+	print("S3 Best Practices Violations:")
+	plan.print_violations(nonPrivateS3Buckets["messages"], "Non-private S3 Buckets")
+	plan.print_violations(nonVersionatedS3Buckets["messages"], "Non-versionated S3 Buckets")
+} else {
+	print("S3 Best Practices: All buckets are private and versioned.")
+}
+
 main = rule {
 	validated is true
 }
