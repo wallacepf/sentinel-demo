@@ -28,7 +28,7 @@ module "s3_bucket" {
 
   tags = {
     Owner   = "Dev"
-    Purpose = "Demo"
+    Purpose = "Demoooooo"
   }
 
   server_side_encryption_configuration = {
