@@ -23,7 +23,7 @@ module "s3_bucket" {
   force_destroy = true
 
   versioning = {
-    enabled = true
+    enabled = false
   }
 
   tags = {
